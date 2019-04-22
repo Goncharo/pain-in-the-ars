@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Nodes/Player.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 2.0
+
+[sub_resource type="NoiseTexture" id=2]
+width = 20
+height = 50
+noise = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 24.9819 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0, -0.130511 )
+scale = Vector2( 1, 2.47476 )
+
