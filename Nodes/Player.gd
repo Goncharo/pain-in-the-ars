@@ -4,12 +4,14 @@ export var gravity = 1600
 export var initial_jump_speed = -250
 export var additional_jump_speed = -50
 export var max_jump_speed = -550
+export var dash_speed = -700
 export var speed = 450
 
 
 var velocity = Vector2()
 var jumping = false
 var falling = true
+var dashing = false
 var START_POS : Vector2
 var screen_size
 
@@ -31,8 +33,9 @@ func getInput(delta):
 	var left = Input.is_action_pressed("ui_left")
 	var up = Input.is_action_pressed("ui_up")
 	var down = Input.is_action_pressed("ui_down")
-	var jump = Input.is_action_pressed("ui_select")
+	var jump = Input.is_action_pressed("ui_select") || Input.is_action_just_pressed("ui_select")
 
+	
 	if jump and is_on_floor():
 		jumping = true
 		velocity.y = initial_jump_speed
@@ -40,6 +43,10 @@ func getInput(delta):
 		velocity.y 	+= additional_jump_speed
 	else: 
 		jumping = false
+		
+	if Input.is_action_just_pressed("ui_select") and !jumping and !dashing:
+		dashing = true
+		velocity.y = dash_speed
 
 		
 	if left:
@@ -52,6 +59,9 @@ func _physics_process(delta):
 	
 	if jumping and is_on_floor():
 		jumping = false
+		
+	if dashing and is_on_floor():
+		dashing = false
 		
 	if !falling and is_on_floor():
 		velocity.y = 0
