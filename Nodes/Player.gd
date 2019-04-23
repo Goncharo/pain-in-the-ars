@@ -31,9 +31,9 @@ func getInput(delta):
 	
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
-	var up = Input.is_action_pressed("ui_up")
+	#var up = Input.is_action_pressed("ui_up")
 	var down = Input.is_action_pressed("ui_down")
-	var jump = Input.is_action_pressed("ui_select") || Input.is_action_just_pressed("ui_select")
+	var jump = Input.is_action_pressed("ui_up") || Input.is_action_just_pressed("ui_up")
 
 	
 	if jump and is_on_floor():
