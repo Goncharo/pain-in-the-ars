@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Request.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Request.gd" type="Script" id=1]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 period = 70.5
@@ -17,7 +17,8 @@ extents = Vector2( 14.974, 14.9872 )
 
 [node name="Request" type="RigidBody2D"]
 collision_layer = 2
-collision_mask = 25
+collision_mask = 8
+gravity_scale = 0.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -28,4 +29,8 @@ texture = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.0696073, 0.0696099 )
+scale = Vector2( 1.50119, 1.49423 )
 
