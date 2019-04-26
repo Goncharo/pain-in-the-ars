@@ -6,7 +6,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$RequestSpawner.start(0.5, $ARS.position)
+	$RequestSpawner.start(1, $ARS.position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -8,7 +8,7 @@ var target = Vector2()
 func _ready():
 	$SpawnTimer.connect("timeout", self, "_onSpawnTimerTimeout")
 	
-func start(spawn_frequency, target):
+func start(spawn_frequency : float, target : Vector2):
 	self.target = target
 	$SpawnTimer.start(spawn_frequency)
 

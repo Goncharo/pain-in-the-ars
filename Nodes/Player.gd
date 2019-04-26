@@ -1,5 +1,10 @@
 extends KinematicBody2D
 
+signal dead
+signal hit
+
+export (PackedScene) var Bullet
+
 # the world gravity
 export var gravity = 1600
 # the speed at which the player will jump when jump is first pressed
@@ -14,7 +19,7 @@ export var dash_speed = -700
 # player movement speed along the x axis
 export var speed = 450
 # player's health
-# export var health = 100
+export var health = 100
 
 var START_POS : Vector2		# stores the player's original spawn position
 
@@ -24,6 +29,7 @@ var falling = true			# whether or not the player is falling
 var dashing = false			# whether or not the played is (or has) dashed while falling	
 var screen_size				# stores the game's window size
 var started_jumping = false
+var facing_right = true
 
 # _ready ---------------------------------------------------------------------------
 # Description:
@@ -33,6 +39,7 @@ func _ready():
 	START_POS = position
 	screen_size = get_viewport_rect().size
 	$VisibilityNotifier2D.connect("screen_exited", self, "respawn")
+	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 
 # respawn --------------------------------------------------------------------------
 # Description:
@@ -53,6 +60,7 @@ func getInput():
 	
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
+	update_orientation(left, right)
 	#var up = Input.is_action_pressed("ui_up")
 	#var down = Input.is_action_pressed("ui_down")
 	var jump = Input.is_action_pressed("ui_select") || Input.is_action_just_pressed("ui_select")
@@ -112,7 +120,32 @@ func _physics_process(delta):
 	# restrict player movement up, but allow them to fall through the bottom of 
 	# the screen
 	position.y = max(0, position.y)
+	
+func _onBodyEntered(body : PhysicsBody2D):
+	if body.is_in_group("requests"):
+		hit(body.damage)
+		body.kill()
+		
+func hit(damage : int):
+	health = max(health - damage, 0)
+	if health == 0:
+		emit_signal("dead")
+	else:
+		emit_signal("hit")
+		
+func update_orientation(left: bool, right: bool):
+	if (left and right) or right:
+		facing_right = true
+	elif left:
+		facing_right = false
 
+func shoot():
+	# spawn the the bullet at the player location
+	var bullet = Bullet.instance()
+	get_parent().add_child(bullet)
+	var direction = Vector2(1,0) if facing_right else Vector2(-1,0)
+	bullet.spawn(direction, position)
+	
 # _process -------------------------------------------------------------------------
 # Description:
 #	Called during the processing step of the main loop. Processing happens at every 
@@ -123,4 +156,5 @@ func _physics_process(delta):
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
