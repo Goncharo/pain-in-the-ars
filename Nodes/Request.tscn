@@ -1,20 +1,23 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Nodes/Player.gd" type="Script" id=1]
+[ext_resource path="res://Request.gd" type="Script" id=1]
 
 [sub_resource type="OpenSimplexNoise" id=1]
-period = 2.0
+period = 70.5
+persistence = 0.0
+lacunarity = 0.1
 
 [sub_resource type="NoiseTexture" id=2]
-width = 20
-height = 50
+width = 30
+height = 30
 noise = SubResource( 1 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 10, 24.9819 )
+extents = Vector2( 14.974, 14.9872 )
 
-[node name="Player" type="KinematicBody2D"]
-collision_mask = 6
+[node name="Request" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 25
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -25,8 +28,4 @@ texture = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -0.130511 )
-scale = Vector2( 1, 2.47476 )
 

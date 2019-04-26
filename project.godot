@@ -57,6 +57,14 @@ ui_down={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="players"
+2d_physics/layer_2="requests"
+2d_physics/layer_3="platforms"
+2d_physics/layer_4="bullets"
+2d_physics/layer_5="ars"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

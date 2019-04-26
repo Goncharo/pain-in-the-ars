@@ -10,6 +10,7 @@ height = 20
 extents = Vector2( 67.6825, 10 )
 
 [node name="Platform" type="StaticBody2D"]
+collision_layer = 4
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
