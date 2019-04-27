@@ -20,7 +20,7 @@ func _onSpawnTimerTimeout() -> void:
 	$RequestPath/SpawnLocation.set_offset(randi())
 	
 	# spawn the request at the random location
-	var request_instance = request.instance()
+	var request_instance = request.instance() as Request
 	add_child(request_instance)
 	request_instance.spawn(target, $RequestPath/SpawnLocation.position)
 	
