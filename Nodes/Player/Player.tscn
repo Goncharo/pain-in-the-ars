@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Nodes/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Nodes/Bullet/Bullet.tscn" type="PackedScene" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25.5761, 50.3149 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 24.485, 50.3149 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 2.0
+
+[sub_resource type="NoiseTexture" id=4]
+width = 50
+height = 100
+noise = SubResource( 3 )
+
+[node name="Player" type="KinematicBody2D"]
+collision_mask = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+Bullet = ExtResource( 2 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -0.0681953, -0.130516 )
+scale = Vector2( 2.52068, 5.02514 )
+

@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+class_name Player
+
 signal dead
 signal hit
 
@@ -35,7 +37,7 @@ var facing_right = true
 # Description:
 #	Called when the node enters the scene tree for the first time.
 #-----------------------------------------------------------------------------------
-func _ready():
+func _ready() -> void:
 	START_POS = position
 	screen_size = get_viewport_rect().size
 	$VisibilityNotifier2D.connect("screen_exited", self, "respawn")
@@ -46,7 +48,7 @@ func _ready():
 #	Will respawn the player at the their original spawn position, and reset their
 #   velocity vector.
 #-----------------------------------------------------------------------------------	
-func respawn():
+func respawn() -> void:
 	velocity = Vector2()
 	position = START_POS
 
@@ -54,7 +56,7 @@ func respawn():
 # Description:
 #	Gets keyboard input, and adjusts player's velocity accordingly
 #-----------------------------------------------------------------------------------	
-func getInput():
+func getInput() -> void:
 	
 	velocity.x = 0
 	
@@ -94,7 +96,7 @@ func getInput():
 # Inputs:
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	
 	if jumping and is_on_floor():
 		jumping = false
@@ -121,27 +123,29 @@ func _physics_process(delta):
 	# the screen
 	position.y = max(0, position.y)
 	
-func _onBodyEntered(body : PhysicsBody2D):
-	if body.is_in_group("requests"):
-		hit(body.damage)
-		body.kill()
+func _onBodyEntered(body : PhysicsBody2D) -> void:
+	var request := body as Request
+	if not request:
+		return
+	hit(request.damage)
+	request.kill()
 		
-func hit(damage : int):
+func hit(damage : int) -> void:
 	health = max(health - damage, 0)
 	if health == 0:
 		emit_signal("dead")
 	else:
 		emit_signal("hit")
 		
-func update_orientation(left: bool, right: bool):
+func update_orientation(left: bool, right: bool) -> void:
 	if (left and right) or right:
 		facing_right = true
 	elif left:
 		facing_right = false
 
-func shoot():
+func shoot() -> void:
 	# spawn the the bullet at the player location
-	var bullet = Bullet.instance()
+	var bullet = Bullet.instance() as Bullet
 	get_parent().add_child(bullet)
 	var direction = Vector2(1,0) if facing_right else Vector2(-1,0)
 	bullet.spawn(direction, position)
@@ -155,6 +159,6 @@ func shoot():
 # Inputs:
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
-func _process(delta):
+func _process(delta) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		shoot()

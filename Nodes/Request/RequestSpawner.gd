@@ -1,25 +1,27 @@
 extends Node2D
 
-export (PackedScene) var Request
+class_name RequestSpawner
+
+export (PackedScene) var request
 
 var target = Vector2()
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	$SpawnTimer.connect("timeout", self, "_onSpawnTimerTimeout")
 	
-func start(spawn_frequency : float, target : Vector2):
+func start(spawn_frequency : float, target : Vector2) -> void:
 	self.target = target
 	$SpawnTimer.start(spawn_frequency)
 
-func _onSpawnTimerTimeout():
+func _onSpawnTimerTimeout() -> void:
 	
 	# choose a random location on the RequestPath
 	$RequestPath/SpawnLocation.set_offset(randi())
 	
 	# spawn the request at the random location
-	var request = Request.instance()
-	add_child(request)
-	request.spawn(target, $RequestPath/SpawnLocation.position)
+	var request_instance = request.instance()
+	add_child(request_instance)
+	request_instance.spawn(target, $RequestPath/SpawnLocation.position)
 	
 

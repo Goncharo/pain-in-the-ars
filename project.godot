@@ -8,15 +8,50 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Area2D",
+"class": "ARS",
+"language": "GDScript",
+"path": "res://Nodes/ARS/ARS.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Bullet",
+"language": "GDScript",
+"path": "res://Nodes/Bullet/Bullet.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Platform",
+"language": "GDScript",
+"path": "res://Nodes/Platform/Platform.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Nodes/Player/Player.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Request",
+"language": "GDScript",
+"path": "res://Nodes/Request/Request.gd"
+}, {
+"base": "Node2D",
+"class": "RequestSpawner",
+"language": "GDScript",
+"path": "res://Nodes/Request/RequestSpawner.gd"
+} ]
 _global_script_class_icons={
-
+"ARS": "",
+"Bullet": "",
+"Platform": "",
+"Player": "",
+"Request": "",
+"RequestSpawner": ""
 }
 
 [application]
 
 config/name="pain-in-the-ars"
-run/main_scene="res://Levels/TestLevel.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [display]
