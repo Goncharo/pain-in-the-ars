@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Nodes/Platform/Platform.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Platform/Platform.gd" type="Script" id=1]
 
 [sub_resource type="NoiseTexture" id=1]
 width = 50
@@ -10,6 +10,7 @@ height = 20
 extents = Vector2( 67.6825, 10 )
 
 [node name="Platform" type="StaticBody2D"]
+z_index = -1
 collision_layer = 4
 script = ExtResource( 1 )
 __meta__ = {

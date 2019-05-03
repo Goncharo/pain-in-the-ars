@@ -9,9 +9,6 @@ extends Node2D
 func _ready():
 	$RequestSpawner.start(1, $ARS.position)
 
-
-func killed():
-	print("killed")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

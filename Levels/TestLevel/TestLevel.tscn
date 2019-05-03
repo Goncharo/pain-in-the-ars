@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Levels/Test/TestLevel.gd" type="Script" id=1]
-[ext_resource path="res://Nodes/Platform/Platform.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Nodes/ARS/ARS.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Nodes/Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Nodes/Request/RequestSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Levels/TestLevel/TestLevel.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Platform/Platform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/ARS/ARS.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Request/RequestSpawner.tscn" type="PackedScene" id=5]
 
 [node name="TestLevel" type="Node2D"]
 script = ExtResource( 1 )

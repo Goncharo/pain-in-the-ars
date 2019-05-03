@@ -2,10 +2,9 @@ extends KinematicBody2D
 
 class_name Player
 
-signal dead
-signal hit
-
 export (PackedScene) var Bullet
+
+var gameState : GameState
 
 # the world gravity
 export var gravity = 1600
@@ -20,8 +19,6 @@ export var max_jump_speed = -550
 export var dash_speed = -700
 # player movement speed along the x axis
 export var speed = 450
-# player's health
-export var health = 100
 
 var START_POS : Vector2		# stores the player's original spawn position
 
@@ -42,6 +39,7 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 	$VisibilityNotifier2D.connect("screen_exited", self, "respawn")
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
+	gameState = get_node("/root/GameState")
 
 # respawn --------------------------------------------------------------------------
 # Description:
@@ -131,11 +129,7 @@ func _onBodyEntered(body : PhysicsBody2D) -> void:
 	request.kill()
 		
 func hit(damage : int) -> void:
-	health = max(health - damage, 0)
-	if health == 0:
-		emit_signal("dead")
-	else:
-		emit_signal("hit")
+	gameState.updatePlayerHealth(-damage)
 		
 func update_orientation(left: bool, right: bool) -> void:
 	if (left and right) or right:
