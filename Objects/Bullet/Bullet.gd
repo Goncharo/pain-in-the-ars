@@ -3,7 +3,7 @@ extends RigidBody2D
 class_name Bullet
 
 export var speed = 2000
-export var damage = 100
+export var damage = 10
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

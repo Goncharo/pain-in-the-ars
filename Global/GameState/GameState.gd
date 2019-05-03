@@ -13,6 +13,7 @@ var playerHealth = 0
 var playerSkrilla = 0
 var arsHealth = 0
 var playerScore = 0
+var playerPosition = Vector2()
 
 export var playerMaxHealth = 100
 export var arsMaxHealth = 100

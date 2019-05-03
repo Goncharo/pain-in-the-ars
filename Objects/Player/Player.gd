@@ -121,6 +121,8 @@ func _physics_process(delta) -> void:
 	# the screen
 	position.y = max(0, position.y)
 	
+	gameState.playerPosition = position
+	
 func _onBodyEntered(body : PhysicsBody2D) -> void:
 	var request := body as Request
 	if not request:
