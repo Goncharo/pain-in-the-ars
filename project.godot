@@ -49,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Global/SceneManager/SceneManager.gd"
 }, {
+"base": "Control",
+"class": "Shop",
+"language": "GDScript",
+"path": "res://GUI/Shop/Shop.gd"
+}, {
+"base": "Control",
+"class": "ShopItem",
+"language": "GDScript",
+"path": "res://GUI/Shop/ShopItem.gd"
+}, {
 "base": "Node2D",
 "class": "Survival",
 "language": "GDScript",
@@ -63,6 +73,8 @@ _global_script_class_icons={
 "Request": "",
 "RequestSpawner": "",
 "SceneManager": "",
+"Shop": "",
+"ShopItem": "",
 "Survival": ""
 }
 
@@ -125,6 +137,16 @@ ui_down={
 shoot={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"unicode":0,"echo":false,"script":null)
+ ]
+}
+open_shop={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":66,"unicode":0,"echo":false,"script":null)
+ ]
+}
+debug_mode={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":96,"unicode":0,"echo":false,"script":null)
  ]
 }
 

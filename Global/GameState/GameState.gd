@@ -6,6 +6,7 @@ signal update_player_message
 signal update_player_health
 signal update_player_skrilla
 signal update_player_score
+signal update_player_ability
 signal update_ars_health
 signal game_over
 
@@ -15,12 +16,21 @@ var arsHealth = 0
 var playerScore = 0
 var playerPosition = Vector2()
 
-export var playerMaxHealth = 100
+var playerMaxHealth = 100
 export var arsMaxHealth = 100
+export var arsHealthUpgrade = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+
+func upgradeAbility(name: String, cost: int) -> void:
+	updatePlayerSkrilla(-cost)
+	if(name == "ARS Health"):
+		arsMaxHealth += arsHealthUpgrade
+		reset_health_stats()
+		return
+	emit_signal("update_player_ability", name)
 
 func reset_health_stats() -> void:
 	setPlayerHealth(playerMaxHealth)

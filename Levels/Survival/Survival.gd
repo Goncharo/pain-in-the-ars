@@ -10,17 +10,19 @@ export var additional_speed: float = -0.05
 
 export var initial_request_speed_mult: float = 1.0
 export var max_request_speed_mult: float = 4.0
-export var additional_request_speed: float = 0.25
+export var additional_request_speed: float = 0.1
 
-export var initial_num_requests: int = 20
-export var num_additional_requests: int = 10
+export var initial_num_requests: int = 10
+export var num_additional_requests: int = 3
 
-export var wave_wait_time: int = 10
+export var wave_wait_time: int = 15
 
 var cur_spawn_speed: float = 0
 var cur_num_requests: float = 0
 var cur_request_speed_mult: float = 0
 var cur_wave: int = 0
+var shop_enabled: bool = false
+var shop_open: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,6 +34,8 @@ func _ready() -> void:
 	$SecondTimer.connect("timeout", self, "_onSecondTimerTimeout")
 	$WaveTimer.one_shot = true
 	$SecondTimer.one_shot = false
+	$GUI/Shop.hide()
+	$GUI/HUD.show()
 	gameState.reset_health_stats()
 	nextWave()
 
@@ -41,17 +45,21 @@ func _onSecondTimerTimeout() -> void:
 func _onWaveTimerTimeout() -> void:
 	$SecondTimer.stop()
 	gameState.updatePlayerMessage("")
-	# disable buy menu access
 	nextWave()
 
 func _onWaveComplete() -> void:
 	$WaveTimer.start(wave_wait_time)
 	$SecondTimer.start(1)
 	gameState.reset_health_stats()
-	gameState.updatePlayerMessage("NEXT WAVE    " + String(wave_wait_time))
 	# enable buy menu access
+	shop_enabled = true
+	gameState.updatePlayerMessage("NEXT WAVE    " + String(wave_wait_time))
 	
 func nextWave() -> void:
+	# disable buy menu access & hide shop GUI
+	shop_enabled = false
+	$GUI/Shop.hide()
+	$GUI/HUD.show()
 	cur_wave += 1
 	if(cur_wave == 1):
 		cur_num_requests = initial_num_requests
@@ -63,7 +71,23 @@ func nextWave() -> void:
 		cur_spawn_speed = max(cur_spawn_speed + additional_speed, min_spawn_speed)
 		
 	$RequestSpawner.start(cur_spawn_speed, $ARS.position, cur_num_requests, cur_request_speed_mult)
+
+func toggleShop() -> void:
+	if shop_open:
+		$GUI/Shop.hide()
+		$GUI/HUD.show()
+	else:
+		$GUI/HUD.hide()
+		$GUI/Shop.show()
+	shop_open = !shop_open
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("open_shop") and shop_enabled:
+		toggleShop()
+	if Input.is_action_just_pressed("debug_mode"):
+		$WaveTimer.stop()
+		$SecondTimer.stop()
+		shop_enabled = true
+		gameState.updatePlayerSkrilla(100000)
+		gameState.updatePlayerMessage("")

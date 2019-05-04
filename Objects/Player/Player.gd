@@ -13,12 +13,33 @@ export var initial_jump_speed = -250
 # the speed to add to jump velocity while jump is held
 export var additional_jump_speed = -50
 # the player's maximum jump speed, if this limit is reached the player can no longer jump
-export var max_jump_speed = -550
+export var max_jump_speed = -425
 # the speed at which the player will dash while he is falling, not jumping, and has not 
 # dashed yet
-export var dash_speed = -700
+export var dash_speed = -550
 # player movement speed along the x axis
-export var speed = 450
+export var speed = 200
+export var fall_damage = 10
+
+# player health
+export var initial_health = 100
+var cur_health_level = 0
+
+# speed upgrade
+export var speed_upgrade = 150
+var cur_speed_level = 0
+
+# jump upgrade values
+export var initial_jump_speed_upgrade = -75
+export var additional_jump_speed_upgrade = -10
+export var max_jump_speed_upgrade = -75
+export var dash_speed_upgrade = -150
+var cur_jump_level = 0
+
+var cur_shoot_level = 0
+
+# health upgrade values
+export var healthUpgrade = 25
 
 var START_POS : Vector2		# stores the player's original spawn position
 
@@ -40,13 +61,16 @@ func _ready() -> void:
 	$VisibilityNotifier2D.connect("screen_exited", self, "respawn")
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
+	gameState.connect("update_player_ability", self, "_onUpgradePlayerAbility")
+	gameState.playerMaxHealth = initial_health
 
 # respawn --------------------------------------------------------------------------
 # Description:
-#	Will respawn the player at the their original spawn position, and reset their
-#   velocity vector.
+#	Will respawn the player at the their original spawn position, reset their
+#   velocity vector, and make them take fall damage.
 #-----------------------------------------------------------------------------------	
 func respawn() -> void:
+	gameState.updatePlayerHealth(-fall_damage)
 	velocity = Vector2()
 	position = START_POS
 
@@ -144,7 +168,36 @@ func shoot() -> void:
 	var bullet = Bullet.instance() as Bullet
 	get_parent().add_child(bullet)
 	var direction = Vector2(1,0) if facing_right else Vector2(-1,0)
-	bullet.spawn(direction, position)
+	bullet.spawn(direction, position, cur_shoot_level)
+	if cur_shoot_level > 1:
+		var bullet2 = Bullet.instance() as Bullet
+		get_parent().add_child(bullet2)
+		var direction2 = Vector2(1,.05) if facing_right else Vector2(-1,.05)
+		bullet2.spawn(direction2, position, cur_shoot_level)
+	if cur_shoot_level > 2:
+		var bullet3 = Bullet.instance() as Bullet
+		get_parent().add_child(bullet3)
+		var direction3 = Vector2(1,-.05) if facing_right else Vector2(-1,-.05)
+		bullet3.spawn(direction3, position, cur_shoot_level)
+	
+func _onUpgradePlayerAbility(abilityName: String) -> void:
+	if abilityName == "Shooting":
+		cur_shoot_level += 1
+	elif abilityName == "Player Health":
+		gameState.playerMaxHealth += healthUpgrade
+		gameState.reset_health_stats()
+		cur_health_level += 1
+	elif abilityName == "Speed":
+		speed += speed_upgrade
+		cur_speed_level += 1
+	elif abilityName == "Jump":
+		initial_jump_speed += initial_jump_speed_upgrade
+		additional_jump_speed += additional_jump_speed_upgrade
+		max_jump_speed += max_jump_speed_upgrade
+		dash_speed += dash_speed_upgrade
+		cur_jump_level += 1
+	elif abilityName == "Power of X":
+		pass
 	
 # _process -------------------------------------------------------------------------
 # Description:
