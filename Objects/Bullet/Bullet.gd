@@ -18,7 +18,10 @@ func spawn(direction : Vector2, initial_position : Vector2, bullet_level: int) -
 	if bullet_level > 2:
 		pass
 	position = initial_position
-	linear_velocity = direction * speed
+	rotation = (direction - initial_position).angle()
+	linear_velocity = Vector2(speed, 0)
+	linear_velocity = linear_velocity.rotated(rotation)
+
 	
 func _onScreenExited() -> void:
 	queue_free()

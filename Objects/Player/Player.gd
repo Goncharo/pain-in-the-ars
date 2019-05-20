@@ -39,7 +39,11 @@ var cur_jump_level = 0
 var cur_shoot_level = 0
 
 # health upgrade values
-export var healthUpgrade = 25
+export var health_upgrade = 25
+
+# power of X upgrade values
+var power_of_x_max_charge = 0
+export var power_of_x_charge_upgrade = 1
 
 var START_POS : Vector2		# stores the player's original spawn position
 
@@ -163,28 +167,31 @@ func update_orientation(left: bool, right: bool) -> void:
 	elif left:
 		facing_right = false
 
-func shoot() -> void:
+func shoot(target: Vector2) -> void:
 	# spawn the the bullet at the player location
 	var bullet = Bullet.instance() as Bullet
 	get_parent().add_child(bullet)
-	var direction = Vector2(1,0) if facing_right else Vector2(-1,0)
-	bullet.spawn(direction, position, cur_shoot_level)
+	bullet.spawn(target, position, cur_shoot_level)
 	if cur_shoot_level > 1:
 		var bullet2 = Bullet.instance() as Bullet
 		get_parent().add_child(bullet2)
-		var direction2 = Vector2(1,.05) if facing_right else Vector2(-1,.05)
-		bullet2.spawn(direction2, position, cur_shoot_level)
+		var target2 = target
+		target2.x += 20
+		target2.y += 20
+		bullet2.spawn(target2, position, cur_shoot_level)
 	if cur_shoot_level > 2:
 		var bullet3 = Bullet.instance() as Bullet
 		get_parent().add_child(bullet3)
-		var direction3 = Vector2(1,-.05) if facing_right else Vector2(-1,-.05)
-		bullet3.spawn(direction3, position, cur_shoot_level)
+		var target3 = target
+		target3.x -= 20
+		target3.y -= 20
+		bullet3.spawn(target3, position, cur_shoot_level)
 	
 func _onUpgradePlayerAbility(abilityName: String) -> void:
 	if abilityName == "Shooting":
 		cur_shoot_level += 1
 	elif abilityName == "Player Health":
-		gameState.playerMaxHealth += healthUpgrade
+		gameState.playerMaxHealth += health_upgrade
 		gameState.reset_health_stats()
 		cur_health_level += 1
 	elif abilityName == "Speed":
@@ -197,7 +204,11 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 		dash_speed += dash_speed_upgrade
 		cur_jump_level += 1
 	elif abilityName == "Power of X":
-		pass
+		power_of_x_max_charge += power_of_x_charge_upgrade
+		
+func _input(event):
+	if event is InputEventScreenTouch and event.pressed:
+		shoot(event.position)
 	
 # _process -------------------------------------------------------------------------
 # Description:
@@ -209,5 +220,4 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
 func _process(delta) -> void:
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
+	pass

@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Objects/Bullet/Bullet.gd" type="Script" id=1]
 
-
 [sub_resource type="OpenSimplexNoise" id=1]
 octaves = 5
 period = 110.5

@@ -10,6 +10,10 @@ func _ready() -> void:
 	gameState = get_node("/root/GameState")
 
 func _onBodyEntered(body : PhysicsBody2D) -> void:
+	var bullet := body as Bullet
+	if bullet:
+		bullet.kill()
+		
 	var request := body as Request
 	if not request:
 		return

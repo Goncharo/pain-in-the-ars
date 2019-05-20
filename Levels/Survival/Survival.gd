@@ -15,7 +15,7 @@ export var additional_request_speed: float = 0.1
 export var initial_num_requests: int = 10
 export var num_additional_requests: int = 3
 
-export var wave_wait_time: int = 15
+export var wave_wait_time: int = 10
 
 var cur_spawn_speed: float = 0
 var cur_num_requests: float = 0
