@@ -5,15 +5,15 @@ class_name Survival
 var gameState: GameState
 
 export var initial_spawn_speed: float = 1.5
-export var min_spawn_speed: float = 0.1
-export var additional_speed: float = -0.05
+export var min_spawn_speed: float = 0.2
+export var additional_speed: float = -0.1
 
 export var initial_request_speed_mult: float = 1.0
-export var max_request_speed_mult: float = 4.0
-export var additional_request_speed: float = 0.1
+export var max_request_speed_mult: float = 3.0
+export var additional_request_speed: float = 0.15
 
-export var initial_num_requests: int = 10
-export var num_additional_requests: int = 3
+export var initial_num_requests: int = 20
+export var num_additional_requests: int = 5
 
 export var wave_wait_time: int = 10
 
@@ -29,6 +29,7 @@ var shop_open: bool = false
 func _ready() -> void:
 	gameState = get_node("/root/GameState")
 	gameState.updatePlayerMessage("")
+	gameState.connect("game_over", self, "_onGameOver")
 	$RequestSpawner.connect("wave_complete", self, "_onWaveComplete")
 	$WaveTimer.connect("timeout", self, "_onWaveTimerTimeout")
 	$SecondTimer.connect("timeout", self, "_onSecondTimerTimeout")
@@ -36,7 +37,7 @@ func _ready() -> void:
 	$SecondTimer.one_shot = false
 	$GUI/Shop.hide()
 	$GUI/HUD.show()
-	gameState.reset_health_stats()
+	gameState.reset_stats()
 	nextWave()
 
 func _onSecondTimerTimeout() -> void:
@@ -50,7 +51,7 @@ func _onWaveTimerTimeout() -> void:
 func _onWaveComplete() -> void:
 	$WaveTimer.start(wave_wait_time)
 	$SecondTimer.start(1)
-	gameState.reset_health_stats()
+	gameState.reset_stats()
 	# enable buy menu access
 	shop_enabled = true
 	gameState.updatePlayerMessage("NEXT WAVE    " + String(wave_wait_time))
@@ -80,6 +81,11 @@ func toggleShop() -> void:
 		$GUI/HUD.hide()
 		$GUI/Shop.show()
 	shop_open = !shop_open
+	
+func _onGameOver(playerScore) -> void:
+	# post score to database
+	# change scene to leaderboards
+	pass
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

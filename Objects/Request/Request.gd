@@ -8,24 +8,25 @@ enum request_types {TLE, GET_PASSES, RES_REQ}
 
 export var TLE_SPEED = 50
 export var TLE_HEALTH = 20
-export var TLE_DAMAGE = 10
-export var TLE_REWARD = 10
+export var TLE_DAMAGE = 20
+export var TLE_REWARD = 7
 
 export var GET_PASSES_SPEED = 75
 export var GET_PASSES_HEALTH = 10
-export var GET_PASSES_DAMAGE = 5
-export var GET_PASSES_REWARD = 5
+export var GET_PASSES_DAMAGE = 10
+export var GET_PASSES_REWARD = 2
 
 export var RES_REQ_SPEED = 25
 export var RES_REQ_HEALTH = 50
-export var RES_REQ_DAMAGE = 30
-export var RES_REQ_REWARD = 30
+export var RES_REQ_DAMAGE = 60
+export var RES_REQ_REWARD = 15
 
 var speed = 0
 var health = 0
 var damage = 0
 var reward = 0
 var request_type = null
+var killed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,6 +54,7 @@ func initialize_request():
 		damage = TLE_DAMAGE
 		reward = TLE_REWARD
 		request_type = request_types.TLE
+		$Label.text = "TLE"
 	# initialize as GET_PASSES
 	elif num == 2:
 		speed = GET_PASSES_SPEED
@@ -60,6 +62,7 @@ func initialize_request():
 		damage = GET_PASSES_DAMAGE
 		reward = GET_PASSES_REWARD
 		request_type = request_types.GET_PASSES
+		$Label.text = "GET\nPASSES"
 	# initialize as RES_REQ
 	elif num == 3:
 		speed = RES_REQ_SPEED
@@ -67,6 +70,7 @@ func initialize_request():
 		damage = RES_REQ_DAMAGE
 		reward = RES_REQ_REWARD
 		request_type = request_types.RES_REQ
+		$Label.text = "RES\nREQ"
 	
 func _onBodyEntered(body : PhysicsBody2D) -> void:
 	var bullet := body as Bullet
@@ -88,7 +92,15 @@ func _onScreenExited() -> void:
 func kill(bullet: bool = false) -> void:
 	if(bullet):
 		gameState.updatePlayerSkrilla(reward)
+	$Glow.visible = false
+	$ColorRect.visible = false
+	$Label.visible = false
+	killed = true
 	$CollisionShape2D.call_deferred("set_disabled", true)
+	$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
+	linear_velocity = Vector2(0, 0)
+	$Explosion.emitting = true
+	yield(get_tree().create_timer(1), "timeout")
 	queue_free()
 	
 # _physics_process -----------------------------------------------------------------
@@ -102,7 +114,7 @@ func kill(bullet: bool = false) -> void:
 #-----------------------------------------------------------------------------------
 func _physics_process(delta) -> void:
 	# if this is a TLE, follow the player location
-	if request_type == request_types.TLE:
+	if request_type == request_types.TLE and !killed:
 		setLinearVelocity(gameState.playerPosition)
 		
 

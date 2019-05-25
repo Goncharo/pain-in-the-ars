@@ -32,7 +32,6 @@ margin_bottom = 1000.0
 margin_right = 1680.0
 margin_bottom = 615.0
 custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Pain 
 In The 
 ARS"
@@ -41,6 +40,7 @@ valign = 1
 uppercase = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+editor/display_folded = true
 margin_top = 619.0
 margin_right = 1680.0
 margin_bottom = 676.0

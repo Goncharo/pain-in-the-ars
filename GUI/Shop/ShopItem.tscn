@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GUI/Shop/ShopItem.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=2]
@@ -11,14 +11,17 @@ font_data = ExtResource( 2 )
 size = 30
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.741176, 0.494118, 0.105882, 1 )
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.568627, 0.133333, 0.835294, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
+
+[sub_resource type="DynamicFont" id=5]
 size = 30
 font_data = ExtResource( 2 )
 
@@ -45,7 +48,7 @@ margin_top = -7.0
 margin_right = 599.098
 margin_bottom = 33.0
 custom_fonts/font = SubResource( 2 )
-custom_colors/font_color = Color( 0.741176, 0.494118, 0.105882, 1 )
+custom_colors/font_color = Color( 0.568627, 0.133333, 0.835294, 1 )
 text = "LEVEL NAME"
 align = 1
 valign = 1
@@ -57,7 +60,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -505.0
 margin_top = -41.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "COSTS    00000    SKRILLA"
 align = 1
 valign = 1
@@ -71,7 +74,8 @@ margin_left = -250.0
 margin_top = -25.0
 margin_right = 250.0
 margin_bottom = 25.0
-custom_styles/fg = SubResource( 3 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 6 )
 max_value = 4.0
 value = 1.0
 percent_visible = false
@@ -84,6 +88,6 @@ anchor_bottom = 0.5
 margin_left = -500.0
 margin_top = -25.0
 margin_bottom = 25.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 text = "UPGRADE"
 

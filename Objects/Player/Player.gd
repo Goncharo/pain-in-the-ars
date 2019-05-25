@@ -41,9 +41,6 @@ var cur_shoot_level = 0
 # health upgrade values
 export var health_upgrade = 25
 
-# power of X upgrade values
-var power_of_x_max_charge = 0
-export var power_of_x_charge_upgrade = 1
 
 var START_POS : Vector2		# stores the player's original spawn position
 
@@ -89,8 +86,6 @@ func getInput() -> void:
 	var right = Input.is_action_pressed("ui_right")
 	var left = Input.is_action_pressed("ui_left")
 	update_orientation(left, right)
-	#var up = Input.is_action_pressed("ui_up")
-	#var down = Input.is_action_pressed("ui_down")
 	var jump = Input.is_action_pressed("ui_select") || Input.is_action_just_pressed("ui_select")
 
 	# jump if player is on the floor
@@ -192,7 +187,7 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 		cur_shoot_level += 1
 	elif abilityName == "Player Health":
 		gameState.playerMaxHealth += health_upgrade
-		gameState.reset_health_stats()
+		gameState.reset_stats()
 		cur_health_level += 1
 	elif abilityName == "Speed":
 		speed += speed_upgrade
@@ -203,8 +198,6 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 		max_jump_speed += max_jump_speed_upgrade
 		dash_speed += dash_speed_upgrade
 		cur_jump_level += 1
-	elif abilityName == "Power of X":
-		power_of_x_max_charge += power_of_x_charge_upgrade
 		
 func _input(event):
 	if event is InputEventScreenTouch and event.pressed:
@@ -220,4 +213,5 @@ func _input(event):
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
 func _process(delta) -> void:
-	pass
+	if Input.is_action_just_pressed("power_of_x"):
+		gameState.power_of_x()

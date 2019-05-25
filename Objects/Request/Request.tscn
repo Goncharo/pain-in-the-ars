@@ -1,16 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Objects/Request/Request.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=2]
 
-[sub_resource type="OpenSimplexNoise" id=1]
-period = 70.5
-persistence = 0.0
-lacunarity = 0.1
-
-[sub_resource type="NoiseTexture" id=2]
-width = 80
-height = 60
-noise = SubResource( 1 )
+[sub_resource type="DynamicFont" id=6]
+size = 23
+font_data = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 39.8943, 29.9535 )
@@ -18,9 +13,25 @@ extents = Vector2( 39.8943, 29.9535 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 40.1727, 30.0231 )
 
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 50.0
+flag_rotate_y = true
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+initial_velocity_random = 1.0
+angular_velocity = 1.58456e+29
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 8.0
+color = Color( 0.972549, 0.243137, 0.243137, 1 )
+
 [node name="Request" type="RigidBody2D" groups=[
 "requests",
 ]]
+editor/display_folded = true
 collision_layer = 2
 collision_mask = 0
 gravity_scale = 0.0
@@ -31,8 +42,37 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = SubResource( 2 )
+[node name="Glow" type="ColorRect" parent="."]
+modulate = Color( 0.972549, 0.243137, 0.243137, 1 )
+margin_left = -42.0
+margin_top = -32.0
+margin_right = 42.0
+margin_bottom = 32.0
+color = Color( 0.972549, 0.243137, 0.243137, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -40.0
+margin_top = -30.0
+margin_right = 40.0
+margin_bottom = 30.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="."]
+modulate = Color( 0.341176, 0.341176, 0.341176, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.0
+margin_top = -30.0
+margin_right = 40.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "GET
+PASSES"
+align = 1
+valign = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 3 )
@@ -42,9 +82,19 @@ position = Vector2( -0.0696096, 0.0348063 )
 scale = Vector2( 4.0002, 2.99433 )
 
 [node name="Hitbox" type="Area2D" parent="."]
+editor/display_folded = true
 collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 4 )
+
+[node name="Explosion" type="Particles2D" parent="."]
+modulate = Color( 0.972549, 0.243137, 0.243137, 1 )
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+process_material = SubResource( 5 )
 

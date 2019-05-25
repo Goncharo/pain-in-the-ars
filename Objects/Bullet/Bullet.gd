@@ -27,7 +27,11 @@ func _onScreenExited() -> void:
 	queue_free()
 	
 func kill() -> void:
+	$Glow.visible = false
 	$CollisionShape2D.call_deferred("set_disabled", true)
+	linear_velocity = Vector2(0, 0)
+	$Explosion.emitting = true
+	yield(get_tree().create_timer(1), "timeout")
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
