@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Objects/ARS/ARS.gd" type="Script" id=1]
 
@@ -14,6 +14,20 @@ noise = SubResource( 1 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 176.392, 175.95 )
 
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 80.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 600.0
+initial_velocity_random = 1.0
+angular_velocity = 15.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 30.0
+color = Color( 0.529412, 0.945098, 1, 1 )
+
 [node name="ARS" type="Area2D"]
 collision_layer = 16
 collision_mask = 11
@@ -23,8 +37,20 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
 texture = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
 shape = SubResource( 3 )
+
+[node name="Explosion" type="Particles2D" parent="."]
+modulate = Color( 0.529412, 0.945098, 1, 1 )
+emitting = false
+amount = 70
+lifetime = 4.0
+one_shot = true
+explosiveness = 0.9
+randomness = 1.0
+process_material = SubResource( 4 )
 

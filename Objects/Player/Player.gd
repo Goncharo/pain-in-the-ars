@@ -51,6 +51,7 @@ var dashing = false			# whether or not the played is (or has) dashed while falli
 var screen_size				# stores the game's window size
 var started_jumping = false
 var facing_right = true
+var dead = false
 
 # _ready ---------------------------------------------------------------------------
 # Description:
@@ -63,6 +64,7 @@ func _ready() -> void:
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
 	gameState.connect("update_player_ability", self, "_onUpgradePlayerAbility")
+	gameState.connect("player_dead", self, "_onPlayerDead")
 	gameState.playerMaxHealth = initial_health
 
 # respawn --------------------------------------------------------------------------
@@ -72,15 +74,21 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------------	
 func respawn() -> void:
 	gameState.updatePlayerHealth(-fall_damage)
-	velocity = Vector2()
-	position = START_POS
+	if gameState.playerHealth > 0:
+		velocity = Vector2()
+		position = START_POS
+	else:
+		$CollisionShape2D.call_deferred("set_disabled", true)
+		$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
+		queue_free()
+		gameState.emit_signal("player_dead_and_gone")
 
 # getInput -------------------------------------------------------------------------
 # Description:
 #	Gets keyboard input, and adjusts player's velocity accordingly
 #-----------------------------------------------------------------------------------	
 func getInput() -> void:
-	
+		
 	velocity.x = 0
 	
 	var right = Input.is_action_pressed("ui_right")
@@ -107,6 +115,11 @@ func getInput() -> void:
 		velocity.x -= speed
 	if right:
 		velocity.x += speed
+		
+func _onPlayerDead() -> void:
+	dead = true
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
 	
 # _physics_process -----------------------------------------------------------------
 # Description:
@@ -118,24 +131,27 @@ func getInput() -> void:
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
 func _physics_process(delta) -> void:
+	if dead:
+		velocity.x = 0
+		velocity.y = 700
+	else:		
+		if jumping and is_on_floor():
+			jumping = false
 	
-	if jumping and is_on_floor():
-		jumping = false
-
-	if dashing and is_on_floor():
-		dashing = false
+		if dashing and is_on_floor():
+			dashing = false
+			
+		if !falling and is_on_floor():
+			velocity.y = 0
 		
-	if !falling and is_on_floor():
-		velocity.y = 0
-	
-	getInput()
-	
-	if !is_on_floor():
-		falling = true
-		velocity.y += delta * gravity
-	else:
-		falling = false
+		getInput()
 		
+		if !is_on_floor():
+			falling = true
+			velocity.y += delta * gravity
+		else:
+			falling = false
+			
 	move_and_slide(velocity, Vector2(0,-1))
 	
 	# restrict player movement left/right
@@ -200,6 +216,8 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 		cur_jump_level += 1
 		
 func _input(event):
+	if dead:
+		return
 	if event is InputEventScreenTouch and event.pressed:
 		shoot(event.position)
 	
@@ -213,5 +231,7 @@ func _input(event):
 #	delta	- the elapsed time since the previous frame
 #-----------------------------------------------------------------------------------
 func _process(delta) -> void:
+	if dead:
+		return
 	if Input.is_action_just_pressed("power_of_x"):
 		gameState.power_of_x()
