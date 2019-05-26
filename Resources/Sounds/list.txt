@@ -1,26 +1,25 @@
 Sounds required - MP3
-1. intro_letter_drop when game starts make title more interactive. Stabbing sounds when the letters come up, like punch or heavy landing sound
-2. 	button_click_1 click sound - snare sound with high freq stab
-3. 	jump - person sound - ugh
-4. 	double_jump
-5. 	shoot_1, 
-	shoot_2,
-	shoot_3 sound 3 levels, first one tinny, then add weight
-6. impact of bullet
-	-ARS
-	-Requests 
-7. requests_explode
-8. sound when player gets hit
-9. ARS_gets_hit
-10. player_dies
-11. ars_explodes
-12. player_falls_off_map
-13. purchase_screen_open
-14. purcahse_screen_close
-15. upgrade_sound is coin dropping
-16. countdown_timer
-17. howard sound - dreary
-18. dan - kind of happy
-19. background_music
-20. ARS game over song
-21. 
+intro_letter_drop when game starts make title more interactive. Stabbing sounds when the letters come up, like punch or heavy landing sound
+button_click_1 click sound - snare sound with high freq stab
+jump - person sound - ugh
+double_jump
+shoot_1, 
+shoot_2,
+shoot_3 sound 3 levels, first one tinny, then add weight
+bullet_impact_ars
+bullet_impact_player
+requests_explode
+player_gets_hit
+ars_gets_hit
+player_dies
+ars_explodes
+player_falls_off_map
+purchase_screen_open
+purcahse_screen_close
+upgrade_sound is coin dropping
+countdown_timer
+howard sound - dreary
+dan - kind of happy
+background_music
+ars_gameover_song
+text_sound
