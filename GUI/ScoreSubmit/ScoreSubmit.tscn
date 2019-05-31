@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
+[ext_resource path="res://GUI/ScoreSubmit/ScoreSubmit.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 150
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 75
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 75
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 75
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 75
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 50
+font_data = ExtResource( 3 )
+
+[node name="ScoreSubmit" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 120
+custom_constants/margin_top = 80
+custom_constants/margin_left = 120
+custom_constants/margin_bottom = 80
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 1800.0
+margin_bottom = 1000.0
+custom_constants/separation = 75
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1680.0
+alignment = 1
+
+[node name="Game" type="Label" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 488.0
+margin_right = 836.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 1 )
+text = "Game"
+align = 1
+valign = 1
+
+[node name="Over" type="Label" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 666.0
+margin_right = 1014.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 1 )
+text = "OVER"
+align = 1
+valign = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 75.0
+margin_right = 1680.0
+margin_bottom = 75.0
+alignment = 1
+
+[node name="Score" type="Label" parent="VBoxContainer/HBoxContainer2"]
+visible = false
+margin_left = 656.0
+margin_right = 877.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 2 )
+text = "SCORE"
+align = 1
+valign = 1
+
+[node name="ScoreNum" type="Label" parent="VBoxContainer/HBoxContainer2"]
+visible = false
+margin_left = 770.0
+margin_right = 909.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.121764, 1.14549, 0.69, 1 )
+text = "666"
+align = 1
+valign = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 150.0
+margin_right = 1680.0
+margin_bottom = 242.0
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 654.0
+margin_right = 874.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 4 )
+text = "ENTER YOUR NAME    "
+align = 1
+valign = 1
+
+[node name="NameTextBox" type="LineEdit" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 882.0
+margin_right = 1026.0
+margin_bottom = 92.0
+hint_tooltip = "Enter your name here."
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0.121764, 1.14549, 0.69, 1 )
+align = 1
+max_length = 15
+expand_to_text_length = true
+caret_blink = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 150.0
+margin_right = 1680.0
+margin_bottom = 217.0
+custom_constants/margin_right = 300
+custom_constants/margin_left = 300
+
+[node name="SubmitButton" type="Button" parent="VBoxContainer/MarginContainer"]
+margin_left = 300.0
+margin_right = 1380.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 6 )
+disabled = true
+text = "SUBMIT"
+

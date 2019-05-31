@@ -44,6 +44,7 @@ func _ready() -> void:
 	$SecondTimer.one_shot = false
 	$GUI/Shop.hide()
 	$GUI/HUD.show()
+	$GUI/ScoreSubmit.hide()
 	gameState.reset_stats()
 	nextWave()
 	
@@ -70,10 +71,8 @@ func _onARSDead() -> void:
 			var wr = weakref(request)
 			if wr.get_ref():
 				wr.get_ref().kill()
-	yield(get_tree().create_timer(3), "timeout")
-	gameState.updatePlayerMessage("GAME OVER")
-	yield(get_tree().create_timer(3), "timeout")
-	sceneManager.goto_scene("res://Main.tscn")
+	yield(get_tree().create_timer(4), "timeout")
+	game_over()
 
 func _onSecondTimerTimeout() -> void:
 	if game_over:
@@ -128,9 +127,7 @@ func toggleShop() -> void:
 	shop_open = !shop_open
 	
 func game_over() -> void:
-	# post score to database
-	# change scene to leaderboards
-	pass
+	sceneManager.goto_scene("res://GUI/ScoreSubmit/ScoreSubmit.tscn")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

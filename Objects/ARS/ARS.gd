@@ -16,7 +16,7 @@ func _onARSDead():
 	$Sprite.visible = false
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Explosion.emitting = true
-	yield(get_tree().create_timer(4), "timeout")
+	yield(get_tree().create_timer(5), "timeout")
 	queue_free()
 
 func _onBodyEntered(body : PhysicsBody2D) -> void:

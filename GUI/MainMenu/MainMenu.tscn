@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
+[ext_resource path="res://GUI/MainMenu/MainMenu.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-size = 200
-font_data = ExtResource( 1 )
+size = 150
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 300
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 50
-font_data = ExtResource( 1 )
+font_data = ExtResource( 3 )
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -17,10 +23,12 @@ margin_left = -1.96252
 margin_top = -0.981201
 margin_right = -1.96252
 margin_bottom = -0.981201
+theme = ExtResource( 1 )
 custom_constants/margin_right = 120
 custom_constants/margin_top = 80
 custom_constants/margin_left = 120
 custom_constants/margin_bottom = 80
+script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 120.0
@@ -28,33 +36,97 @@ margin_top = 80.0
 margin_right = 1800.0
 margin_bottom = 1000.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Pain" type="Label" parent="VBoxContainer"]
+visible = false
 margin_right = 1680.0
-margin_bottom = 615.0
+margin_bottom = 168.0
 custom_fonts/font = SubResource( 1 )
-text = "Pain 
-In The 
-ARS"
+text = "Pain"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-editor/display_folded = true
-margin_top = 619.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 1680.0
-margin_bottom = 676.0
+alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer"]
+[node name="In" type="Label" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 612.0
+margin_right = 794.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 1 )
+text = "IN"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="The" type="Label" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 707.0
+margin_right = 972.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 1 )
+text = "THE"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="ARS" type="Label" parent="VBoxContainer"]
+visible = false
+margin_top = 8.0
 margin_right = 1680.0
-margin_bottom = 57.0
-custom_constants/margin_right = 200
-custom_constants/margin_left = 200
+margin_bottom = 328.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.105882, 0.996078, 0.6, 1 )
+text = "ARS"
+align = 1
 
-[node name="StartButton" type="Button" parent="VBoxContainer/VBoxContainer/MarginContainer"]
-margin_left = 200.0
-margin_right = 1480.0
-margin_bottom = 57.0
+[node name="Buttons" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 8.0
+margin_right = 1680.0
+margin_bottom = 299.0
+custom_constants/separation = 45
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Buttons"]
+margin_right = 1680.0
+margin_bottom = 67.0
+custom_constants/margin_right = 300
+custom_constants/margin_left = 300
+
+[node name="StartButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer"]
+margin_left = 300.0
+margin_right = 1380.0
+margin_bottom = 67.0
 custom_fonts/font = SubResource( 2 )
 text = "Start"
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Buttons"]
+margin_top = 112.0
+margin_right = 1680.0
+margin_bottom = 179.0
+custom_constants/margin_right = 300
+custom_constants/margin_left = 300
+
+[node name="ScoresButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer2"]
+margin_left = 300.0
+margin_right = 1380.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "Highscores"
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Buttons"]
+margin_top = 224.0
+margin_right = 1680.0
+margin_bottom = 291.0
+custom_constants/margin_right = 300
+custom_constants/margin_left = 300
+
+[node name="TutorialButton" type="Button" parent="VBoxContainer/Buttons/MarginContainer3"]
+margin_left = 300.0
+margin_right = 1380.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "Tutorial"
 

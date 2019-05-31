@@ -9,7 +9,7 @@ var currentLevel: int = 0
 func _ready() -> void:
 	sceneManager = get_node("/root/SceneManager")
 	gameState = get_node("/root/GameState")
-	$GUI/MainMenu/VBoxContainer/VBoxContainer/MarginContainer/StartButton.connect("pressed", self, "startGame")
+	$GUI/MainMenu/VBoxContainer/Buttons/MarginContainer/StartButton.connect("pressed", self, "startGame")
 	
 func startGame() -> void:
 	$GUI/MainMenu.hide()
@@ -17,18 +17,12 @@ func startGame() -> void:
 	
 func nextLevel() -> void:
 	if ++currentLevel == LEVELS.size():
-		gameWon()
+		pass
 	else:
 		sceneManager.goto_scene(_getLevelPath(LEVELS[currentLevel]))
 
 func _getLevelPath(levelName: String) -> String:
 	return "res://Levels/" + levelName + "/" + levelName + ".tscn"
-	
-func gameWon() -> void:
-	print("game won")
-	
-func gameLost() -> void:
-	print("game lost")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
