@@ -10,7 +10,6 @@ light_mode = 2
 extents = Vector2( 67.6825, 10 )
 
 [node name="Platform" type="StaticBody2D"]
-editor/display_folded = true
 z_index = -1
 collision_layer = 4
 script = ExtResource( 1 )
@@ -19,13 +18,12 @@ __meta__ = {
 }
 
 [node name="Glow" type="ColorRect" parent="."]
-modulate = Color( 0.835294, 0.835294, 0.835294, 1 )
 material = SubResource( 1 )
 margin_left = -70.0
 margin_top = -12.0
 margin_right = 69.0
 margin_bottom = 12.0
-color = Color( 0.105882, 0.996078, 0.6, 1 )
+color = Color( 0.360784, 0, 0.803922, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -66.0

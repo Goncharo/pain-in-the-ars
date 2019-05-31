@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Objects/Bullet/Bullet.gd" type="Script" id=1]
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 light_mode = 2
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10.0464, 2.49888 )
 
 [sub_resource type="ParticlesMaterial" id=3]
@@ -23,7 +23,7 @@ angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 4.0
-color = Color( 0.568627, 0.133333, 0.835294, 1 )
+color = Color( 0.145098, 0.905882, 0.298039, 1 )
 
 [node name="Bullet" type="RigidBody2D" groups=[
 "bullets",
@@ -37,23 +37,23 @@ __meta__ = {
 }
 
 [node name="Glow" type="ColorRect" parent="."]
-modulate = Color( 0.568627, 0.133333, 0.835294, 1 )
-material = SubResource( 2 )
+modulate = Color( 0.145098, 0.905882, 0.298039, 1 )
+material = SubResource( 1 )
 margin_left = -10.0
 margin_top = -3.0
 margin_right = 10.0
 margin_bottom = 3.0
-color = Color( 0.568627, 0.133333, 0.835294, 1 )
+color = Color( 0.145098, 0.905882, 0.298039, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0.0216244, -0.0228002 )
 scale = Vector2( 1.0064, 0.252065 )
 
 [node name="Explosion" type="Particles2D" parent="."]
-modulate = Color( 0.568627, 0.133333, 0.835294, 1 )
+modulate = Color( 0.145098, 0.905882, 0.298039, 1 )
 emitting = false
 amount = 20
 one_shot = true

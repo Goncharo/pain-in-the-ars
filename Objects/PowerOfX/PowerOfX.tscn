@@ -20,7 +20,7 @@ margin_top = 399.786
 margin_right = 1256.74
 margin_bottom = 583.786
 custom_fonts/font = SubResource( 1 )
-text = "TEMP"
+text = "X"
 align = 1
 valign = 1
 

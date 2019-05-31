@@ -1,36 +1,135 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://GUI/HUD/HUD.gd" type="Script" id=1]
-[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-size = 100
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 50
-font_data = ExtResource( 2 )
+[ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
+[ext_resource path="res://GUI/HUD/HUD.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://Resources/Animations/FlashGreen.tres" type="Animation" id=4]
+[ext_resource path="res://Resources/Animations/FlashRed.tres" type="Animation" id=5]
 
 [sub_resource type="DynamicFont" id=3]
 size = 50
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 75
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 50
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.121764, 1.14549, 0.69, 1 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.121764, 1.14549, 0.69, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
+
+[sub_resource type="DynamicFont" id=1]
+size = 125
+font_data = ExtResource( 3 )
 
 [node name="HUD" type="Control"]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
 margin_top = 10.0
 margin_right = -10.0
 margin_bottom = -10.0
-script = ExtResource( 1 )
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="PlayerSkrilla" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -500.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 3 )
+text = "SKRILLA    0"
+align = 2
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerSkrilla"]
+playback_speed = 4.0
+anims/FlashGreen = ExtResource( 4 )
+
+[node name="PlayerScore" type="Label" parent="."]
+margin_right = 500.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 5 )
+text = "SCORE    0"
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerScore"]
+playback_speed = 4.0
+anims/FlashGreen = ExtResource( 4 )
+
+[node name="PlayerHealth" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -100.0
+margin_right = 700.0
+
+[node name="PlayerText" type="Label" parent="PlayerHealth"]
+margin_right = 700.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 6 )
+text = "PLAYER"
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerHealth/PlayerText"]
+playback_speed = 4.0
+anims/FlashRed = ExtResource( 5 )
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="PlayerHealth"]
+margin_top = 65.0
+margin_right = 700.0
+margin_bottom = 100.0
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 10 )
+custom_styles/bg = SubResource( 11 )
+value = 50.0
+percent_visible = false
+
+[node name="ARSHealth" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -700.0
+margin_top = -100.0
+
+[node name="ARSText" type="Label" parent="ARSHealth"]
+margin_right = 700.0
+margin_bottom = 57.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "ARS              "
+align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ARSHealth/ARSText"]
+playback_speed = 4.0
+anims/FlashRed = ExtResource( 5 )
+
+[node name="ARSHealthBar" type="ProgressBar" parent="ARSHealth"]
+margin_top = 65.0
+margin_right = 700.0
+margin_bottom = 100.0
+size_flags_vertical = 3
+custom_styles/fg = SubResource( 8 )
+custom_styles/bg = SubResource( 9 )
+value = 50.0
+percent_visible = false
 
 [node name="PlayerMessage" type="Label" parent="."]
 anchor_left = 0.5
@@ -38,52 +137,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -425.5
-margin_top = -190.481
+margin_top = -148.5
 margin_right = 425.5
-margin_bottom = 188.519
+margin_bottom = 148.5
 custom_fonts/font = SubResource( 1 )
 text = "Wave 1"
 align = 1
-valign = 1
-
-[node name="PlayerHealth" type="Label" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = -0.981293
-margin_top = -77.0
-margin_right = 875.019
-margin_bottom = -1.0
-custom_fonts/font = SubResource( 2 )
-text = "HEALTH    0"
-valign = 1
-
-[node name="PlayerSkrilla" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -843.0
-margin_top = -71.0
-custom_fonts/font = SubResource( 3 )
-text = "SKRILLA    0"
-align = 2
-valign = 1
-
-[node name="ARSHealth" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -541.0
-margin_right = 541.0
-margin_bottom = 76.0
-custom_fonts/font = SubResource( 4 )
-text = "ARS Health    0"
-align = 1
-valign = 1
-
-[node name="PlayerScore" type="Label" parent="."]
-margin_right = 683.0
-margin_bottom = 51.0
-custom_fonts/font = SubResource( 5 )
-text = "SCORE    0"
 valign = 1
 
