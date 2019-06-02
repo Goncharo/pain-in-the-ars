@@ -2,7 +2,6 @@ extends Node2D
 
 var sceneManager: SceneManager
 var gameState: GameState
-const LEVELS: Array = ["Survival"]
 var currentLevel: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -10,16 +9,17 @@ func _ready() -> void:
 	sceneManager = get_node("/root/SceneManager")
 	gameState = get_node("/root/GameState")
 	$GUI/MainMenu/VBoxContainer/Buttons/MarginContainer/StartButton.connect("pressed", self, "startGame")
+	$GUI/MainMenu/VBoxContainer/Buttons/MarginContainer2/ScoresButton.connect("pressed", self, "openHighscores")
+	$GUI/MainMenu/VBoxContainer/Buttons/MarginContainer3/TutorialButton.connect("pressed", self, "startTutorial")
 	
 func startGame() -> void:
-	$GUI/MainMenu.hide()
-	sceneManager.goto_scene(_getLevelPath(LEVELS[currentLevel]))
+	sceneManager.goto_scene(_getLevelPath("Survival"))
 	
-func nextLevel() -> void:
-	if ++currentLevel == LEVELS.size():
-		pass
-	else:
-		sceneManager.goto_scene(_getLevelPath(LEVELS[currentLevel]))
+func startTutorial() -> void:
+	sceneManager.goto_scene(_getLevelPath("Tutorial"))
+	
+func openHighscores() -> void:
+	pass
 
 func _getLevelPath(levelName: String) -> String:
 	return "res://Levels/" + levelName + "/" + levelName + ".tscn"

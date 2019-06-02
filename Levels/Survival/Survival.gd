@@ -34,6 +34,8 @@ func _ready() -> void:
 	gameState = get_node("/root/GameState")
 	sceneManager = get_node("/root/SceneManager")
 	gameState.updatePlayerMessage("")
+	gameState.setPlayerScore(0)
+	gameState.setPlayerSkrilla(0)
 	gameState.connect("player_dead", self, "_onPlayerDead")
 	gameState.connect("ars_dead", self, "_onARSDead")
 	gameState.connect("player_dead_and_gone", self, "_onPlayerDeadAndGone")
@@ -43,6 +45,7 @@ func _ready() -> void:
 	$WaveTimer.one_shot = true
 	$SecondTimer.one_shot = false
 	$GUI/Shop.hide()
+	$GUI/Shop.initShopItems()
 	$GUI/HUD.show()
 	$GUI/ScoreSubmit.hide()
 	gameState.reset_stats()

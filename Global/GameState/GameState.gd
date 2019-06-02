@@ -13,6 +13,8 @@ signal ars_dead
 signal player_dead
 signal player_dead_and_gone
 
+var tutorialMode = false
+
 var playerHealth = 0
 var playerSkrilla = 0
 var arsHealth = 0
@@ -59,7 +61,7 @@ func power_of_x() -> void:
 	power_of_x_cur_charge -= 1
 	if power_of_x_cur_charge >= 0 :
 		power_of_x_in_progress = true
-		emit_signal("power_of_x_used")
+		emit_signal("power_of_x_used", tutorialMode)
 
 func updatePlayerMessage(message: String) -> void:
 	emit_signal("update_player_message", message)
@@ -71,8 +73,7 @@ func updatePlayerHealth(health: int) -> void:
 	
 func updatePlayerSkrilla(skrilla: int) -> void:
 	if(skrilla > 0):
-		playerScore += skrilla
-		emit_signal("update_player_score", playerScore)
+		setPlayerScore(playerScore + skrilla)
 	setPlayerSkrilla(playerSkrilla + skrilla)
 	
 func updateARSHealth(health: int) -> void:
@@ -87,6 +88,10 @@ func setPlayerHealth(curHealth : int) -> void:
 func setPlayerSkrilla(curSkrilla : int) -> void:
 	playerSkrilla = max(curSkrilla, 0)
 	emit_signal("update_player_skrilla", playerSkrilla)
+	
+func setPlayerScore(curScore : int) -> void:
+	playerScore = curScore
+	emit_signal("update_player_score", playerScore)
 	
 func setARSHealth(curHealth : int) -> void:
 	arsHealth = max(curHealth, 0)

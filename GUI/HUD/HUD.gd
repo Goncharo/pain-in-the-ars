@@ -24,11 +24,16 @@ func _onUpdatePlayerMessage(message: String):
 	$PlayerMessage.text = message
 	
 func _onUpdatePlayerHealth(playerHealth: int):
+	if playerHealth == gameState.playerMaxHealth :
+		$PlayerHealth/PlayerHealthBar.max_value = gameState.playerMaxHealth
+		$ARSHealth/ARSHealthBar.max_value = gameState.arsMaxHealth
 	$PlayerHealth/PlayerHealthBar.value = playerHealth
 	if playerHealth != gameState.playerMaxHealth:
 		flashPlayerText()
 	
 func _onUpdateARSHealth(arsHealth: int):
+	if arsHealth == gameState.arsMaxHealth :
+		$ARSHealth/ARSHealthBar.max_value = gameState.arsMaxHealth
 	$ARSHealth/ARSHealthBar.value = arsHealth
 	if arsHealth != gameState.arsMaxHealth :
 		flashARSText()

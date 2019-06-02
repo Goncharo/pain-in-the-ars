@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Levels/Tutorial/Tutorial.gd" type="Script" id=1]
+[ext_resource path="res://Objects/Request/Request.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Global/GlobalGlow.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/MessageBox/MessageBox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GUI/HUD/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GUI/Shop/Shop.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Objects/Platform/Platform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/ARS/ARS.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Objects/PowerOfX/PowerOfX.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=10]
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource( 1 )
+request = ExtResource( 2 )
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 3 )]
+
+[node name="MessageBox" parent="." instance=ExtResource( 4 )]
+
+[node name="GUI" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="HUD" parent="GUI" instance=ExtResource( 5 )]
+modulate = Color( 0.156863, 0.156863, 0.156863, 1 )
+margin_left = 6.12793
+margin_top = 7.03708
+margin_right = -13.8721
+margin_bottom = -12.9629
+
+[node name="Shop" parent="GUI" instance=ExtResource( 6 )]
+visible = false
+modulate = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="Platforms" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="Platform" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 960, 850 )
+
+[node name="Platform2" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 1160, 850 )
+
+[node name="Platform3" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 1360, 850 )
+
+[node name="Platform4" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 760, 850 )
+
+[node name="Platform5" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 560, 850 )
+
+[node name="Platform6" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 360, 850 )
+
+[node name="Platform7" parent="Platforms" instance=ExtResource( 7 )]
+position = Vector2( 1560, 850 )
+
+[node name="ARS" parent="." instance=ExtResource( 8 )]
+position = Vector2( 960, 540 )
+
+[node name="PowerOfX" parent="." instance=ExtResource( 9 )]
+modulate = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 10 )]
+modulate = Color( 0.156863, 0.156863, 0.156863, 1 )
+position = Vector2( 559.494, 732.809 )
+
+[node name="RequestSpawnPos" type="Position2D" parent="."]
+position = Vector2( 100, 500 )
+
+[node name="RequestSpawnPos2" type="Position2D" parent="."]
+position = Vector2( 100, 660 )
+
+[node name="RequestSpawnPos3" type="Position2D" parent="."]
+position = Vector2( 1820, 500 )
+
+[node name="RequestSpawnPos4" type="Position2D" parent="."]
+position = Vector2( 1820, 660 )
+

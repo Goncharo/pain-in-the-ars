@@ -6,40 +6,39 @@
 [ext_resource path="res://Resources/Animations/FlashGreen.tres" type="Animation" id=4]
 [ext_resource path="res://Resources/Animations/FlashRed.tres" type="Animation" id=5]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 50
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 size = 50
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.121764, 1.14549, 0.69, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 40
 font_data = ExtResource( 3 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.121764, 1.14549, 0.69, 1 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
-
-[sub_resource type="DynamicFont" id=7]
-size = 40
-font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 0.121764, 1.14549, 0.69, 1 )
-
-[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.105882, 0.105882, 0.105882, 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=9]
 size = 125
 font_data = ExtResource( 3 )
 
 [node name="HUD" type="Control"]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 10.0
@@ -54,7 +53,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -500.0
 margin_bottom = 47.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "SKRILLA    0"
 align = 2
 valign = 1
@@ -66,7 +65,7 @@ anims/FlashGreen = ExtResource( 4 )
 [node name="PlayerScore" type="Label" parent="."]
 margin_right = 500.0
 margin_bottom = 47.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "SCORE    0"
 valign = 1
 
@@ -83,7 +82,7 @@ margin_right = 700.0
 [node name="PlayerText" type="Label" parent="PlayerHealth"]
 margin_right = 700.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 3 )
 text = "PLAYER"
 align = 1
 
@@ -96,8 +95,8 @@ margin_top = 65.0
 margin_right = 700.0
 margin_bottom = 100.0
 size_flags_vertical = 3
-custom_styles/fg = SubResource( 10 )
-custom_styles/bg = SubResource( 11 )
+custom_styles/fg = SubResource( 4 )
+custom_styles/bg = SubResource( 5 )
 value = 50.0
 percent_visible = false
 
@@ -112,7 +111,7 @@ margin_top = -100.0
 [node name="ARSText" type="Label" parent="ARSHealth"]
 margin_right = 700.0
 margin_bottom = 57.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "ARS              "
 align = 1
@@ -126,8 +125,8 @@ margin_top = 65.0
 margin_right = 700.0
 margin_bottom = 100.0
 size_flags_vertical = 3
-custom_styles/fg = SubResource( 8 )
-custom_styles/bg = SubResource( 9 )
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
 value = 50.0
 percent_visible = false
 
@@ -140,7 +139,7 @@ margin_left = -425.5
 margin_top = -148.5
 margin_right = 425.5
 margin_bottom = 148.5
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
 text = "Wave 1"
 align = 1
 valign = 1

@@ -10,9 +10,14 @@ func _ready():
 	gameState = get_node("/root/GameState")
 	gameState.connect("power_of_x_used", self, "_onPowerOfXUsed")
 	
-func _onPowerOfXUsed() -> void:
-	# 10% chance that Howard appears
-	var num = randi() % 10 + 1
+func _onPowerOfXUsed(tutorialMode: bool) -> void:
+	var num = 0
+	if tutorialMode:
+		# if we're in tutorial mode, use Dan
+		num = 2
+	else:
+		# 10% chance that Howard appears
+		num = randi() % 10 + 1
 	
 	if num == 1:
 		# Howard appears on sceen, causes damage to player and ARS

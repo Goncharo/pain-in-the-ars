@@ -3,7 +3,6 @@
 [ext_resource path="res://Objects/Request/RequestSpawner.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Request/Request.tscn" type="PackedScene" id=2]
 
-
 [sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0 )

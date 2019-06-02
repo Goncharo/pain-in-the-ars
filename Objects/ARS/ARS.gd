@@ -18,6 +18,12 @@ func _onARSDead():
 	$Explosion.emitting = true
 	yield(get_tree().create_timer(5), "timeout")
 	queue_free()
+	
+func disableCollisions():
+	$CollisionShape2D.call_deferred("set_disabled", true)
+	
+func enableCollisions():
+	$CollisionShape2D.call_deferred("set_disabled", false)
 
 func _onBodyEntered(body : PhysicsBody2D) -> void:
 	if dead:

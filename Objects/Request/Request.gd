@@ -34,8 +34,8 @@ func _ready() -> void:
 	$Hitbox.connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
 
-func spawn(target: Vector2, initial_position: Vector2, speed_multiplier: float) -> void:
-	initialize_request()
+func spawn(target: Vector2, initial_position: Vector2, speed_multiplier: float, requestNum: int = -1) -> void:
+	initialize_request(requestNum)
 	speed *= speed_multiplier
 	position = initial_position
 	setLinearVelocity(target)
@@ -45,8 +45,10 @@ func setLinearVelocity(target: Vector2) -> void:
 	linear_velocity = Vector2(speed, 0)
 	linear_velocity = linear_velocity.rotated((target - position).angle())
 
-func initialize_request():
-	var num = randi() % 3 + 1
+func initialize_request(requestNum: int):
+	var num = requestNum
+	if num < 0:
+		num = randi() % 3 + 1
 	# initialize as TLE
 	if num == 1:
 		speed = TLE_SPEED
