@@ -19,7 +19,7 @@ func startTutorial() -> void:
 	sceneManager.goto_scene(_getLevelPath("Tutorial"))
 	
 func openHighscores() -> void:
-	pass
+	sceneManager.goto_scene("res://GUI/Highscores/Highscores.tscn")
 
 func _getLevelPath(levelName: String) -> String:
 	return "res://Levels/" + levelName + "/" + levelName + ".tscn"

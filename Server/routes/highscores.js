@@ -30,7 +30,7 @@ router.get('/highscore', function(req, res){
         return res.status(400).send('Bad request');
     }
 
-    Highscore.find({}, null, {limit: numToReturn}, (err, highscores) => {
+    Highscore.find({}, null, {limit: numToReturn, sort: {score: -1}}, (err, highscores) => {
         if (err){
             console.error(err);
             return res.status(500).send('Internal error');

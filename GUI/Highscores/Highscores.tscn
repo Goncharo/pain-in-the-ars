@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
+[ext_resource path="res://GUI/Highscores/Highscores.gd" type="Script" id=2]
+[ext_resource path="res://GUI/Highscores/HighscoreItem.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 75
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 4 )
+
+[node name="Highscores" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+custom_constants/margin_right = 120
+custom_constants/margin_top = 80
+custom_constants/margin_left = 120
+custom_constants/margin_bottom = 80
+script = ExtResource( 2 )
+HighscoreItem = ExtResource( 3 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 120.0
+margin_top = 80.0
+margin_right = 1800.0
+margin_bottom = 1000.0
+custom_constants/separation = 40
+
+[node name="Text" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_right = 1680.0
+margin_bottom = 118.0
+
+[node name="HighscoresText" type="Label" parent="VBoxContainer/Text"]
+margin_right = 1680.0
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 1 )
+text = "HIGHSCORES"
+align = 1
+
+[node name="Highscores" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 1680.0
+custom_constants/separation = 10
+
+[node name="Button" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+margin_top = 134.0
+margin_right = 1680.0
+margin_bottom = 201.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Button"]
+margin_right = 1680.0
+margin_bottom = 67.0
+custom_constants/margin_right = 300
+custom_constants/margin_top = 0
+custom_constants/margin_left = 300
+
+[node name="MainMenuButton" type="Button" parent="VBoxContainer/Button/MarginContainer"]
+margin_left = 300.0
+margin_right = 1380.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 2 )
+text = "MAIN MENU"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+

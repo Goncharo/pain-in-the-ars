@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/howard.wav-ce0cb801a7116900e4da1301591eea68.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/howard.wav"
+dest_files=[ "res://.import/howard.wav-ce0cb801a7116900e4da1301591eea68.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
