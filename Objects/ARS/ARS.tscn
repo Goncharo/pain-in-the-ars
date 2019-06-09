@@ -1,20 +1,28 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Objects/ARS/ARS.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/ARS/ARS1.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Sprites/ARS/ARS2.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Sprites/ARS/ARS3.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Sprites/ARS/ARS4.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Sprites/ARS/ARS5.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Sprites/ARS/ARS6.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Sprites/ARS/ARS7.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Sprites/ARS/ARS8.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Sprites/ARS/ARS9.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Sprites/ARS/ARS10.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Sprites/ARS/ARS11.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Sprites/ARS/ARS12.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Sprites/ARS/ARS13.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Sprites/ARS/ARS14.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Sprites/ARS/ARS15.png" type="Texture" id=16]
+[ext_resource path="res://Resources/Sprites/ARS/ARS16.png" type="Texture" id=17]
+[ext_resource path="res://Resources/Sprites/ARS/ARS17.png" type="Texture" id=18]
 
-[sub_resource type="OpenSimplexNoise" id=1]
-octaves = 6
-period = 10.0
-
-[sub_resource type="NoiseTexture" id=2]
-width = 350
-height = 350
-noise = SubResource( 1 )
-
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 176.392, 175.95 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 1
 emission_sphere_radius = 80.0
 flag_disable_z = true
@@ -28,6 +36,19 @@ orbit_velocity_random = 0.0
 scale = 30.0
 color = Color( 0.529412, 0.945098, 1, 1 )
 
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "Hit",
+"speed": 20.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": false,
+"name": "Boot",
+"speed": 2.0
+} ]
+
 [node name="ARS" type="Area2D"]
 collision_layer = 16
 collision_mask = 11
@@ -36,13 +57,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
-texture = SubResource( 2 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.196078, 0.196078, 0.196078, 1 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Explosion" type="Particles2D" parent="."]
 modulate = Color( 0.529412, 0.945098, 1, 1 )
@@ -52,5 +69,10 @@ lifetime = 5.0
 one_shot = true
 explosiveness = 0.9
 randomness = 1.0
-process_material = SubResource( 4 )
+process_material = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+frames = SubResource( 3 )
+animation = "Boot"
 

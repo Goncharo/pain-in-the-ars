@@ -52,6 +52,7 @@ var screen_size				# stores the game's window size
 var started_jumping = false
 var facing_right = true
 var dead = false
+var shoot_toggle = false
 
 # _ready ---------------------------------------------------------------------------
 # Description:
@@ -100,6 +101,7 @@ func getInput() -> void:
 	if jump and is_on_floor():
 		jumping = true
 		velocity.y = initial_jump_speed
+		$AnimatedSprite.play("Jumping")
 	# if player holds the jump key, add additional velocity until the max is reached
 	elif jump and jumping and velocity.y > max_jump_speed:
 		velocity.y 	+= additional_jump_speed
@@ -108,13 +110,24 @@ func getInput() -> void:
 	
 	# allow player to dash up once, if they haven't already in the current jump	
 	if Input.is_action_just_pressed("ui_select") and !jumping and !dashing and falling:
+		$AnimatedSprite.playing = false
+		$AnimatedSprite.frame = 0
+		$AnimatedSprite.play("Jumping")
 		dashing = true
 		velocity.y = dash_speed
 		
 	if left:
 		velocity.x -= speed
+		if is_on_floor() and !(jumping or dashing):
+			$AnimatedSprite.play("Running")
 	if right:
 		velocity.x += speed
+		if is_on_floor() and !(jumping or dashing):
+			$AnimatedSprite.play("Running")
+			
+	if is_on_floor() and !(left or right) and !(jumping or dashing):
+		$AnimatedSprite.playing = false
+		$AnimatedSprite.frame = 0
 		
 func _onPlayerDead() -> void:
 	dead = true
@@ -175,28 +188,34 @@ func hit(damage : int) -> void:
 func update_orientation(left: bool, right: bool) -> void:
 	if (left and right) or right:
 		facing_right = true
+		$AnimatedSprite.flip_h = false
 	elif left:
+		$AnimatedSprite.flip_h = true
 		facing_right = false
 
 func shoot(target: Vector2) -> void:
-	# spawn the the bullet at the player location
+	# spawn the the bullet at the player eye location
+	shoot_toggle = !shoot_toggle
+	var spawn_position = position + $Eye1.position
+	if shoot_toggle:
+		spawn_position = position + $Eye2.position
 	var bullet = Bullet.instance() as Bullet
 	get_parent().add_child(bullet)
-	bullet.spawn(target, position, cur_shoot_level)
+	bullet.spawn(target, spawn_position, cur_shoot_level)
 	if cur_shoot_level > 1:
 		var bullet2 = Bullet.instance() as Bullet
 		get_parent().add_child(bullet2)
 		var target2 = target
 		target2.x += 20
 		target2.y += 20
-		bullet2.spawn(target2, position, cur_shoot_level)
+		bullet2.spawn(target2, spawn_position, cur_shoot_level)
 	if cur_shoot_level > 2:
 		var bullet3 = Bullet.instance() as Bullet
 		get_parent().add_child(bullet3)
 		var target3 = target
 		target3.x -= 20
 		target3.y -= 20
-		bullet3.spawn(target3, position, cur_shoot_level)
+		bullet3.spawn(target3, spawn_position, cur_shoot_level)
 	
 func _onUpgradePlayerAbility(abilityName: String) -> void:
 	if abilityName == "Shooting":

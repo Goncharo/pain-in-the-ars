@@ -10,10 +10,21 @@ func _ready() -> void:
 	connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
 	gameState.connect("ars_dead", self, "_onARSDead")
+	$AnimatedSprite.play("Boot")
+
+func playBootAnim() -> void:
+	$AnimatedSprite.animation = "Boot"
+	$AnimatedSprite.frame = 0
+	$AnimatedSprite.play("Boot")
+	
+func playHitAnim() -> void:
+	$AnimatedSprite.animation = "Hit"
+	$AnimatedSprite.frame = 0
+	$AnimatedSprite.play("Hit")
 
 func _onARSDead():
 	dead = true
-	$Sprite.visible = false
+	$AnimatedSprite.visible = false
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Explosion.emitting = true
 	yield(get_tree().create_timer(5), "timeout")
@@ -35,6 +46,7 @@ func _onBodyEntered(body : PhysicsBody2D) -> void:
 	var request := body as Request
 	if not request:
 		return
+	playHitAnim()
 	gameState.updateARSHealth(-request.damage)
 	request.kill()
 

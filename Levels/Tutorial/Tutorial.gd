@@ -220,7 +220,7 @@ func progressTutorial() -> void:
 			playPlayerMessage("if a request gets to ars it will take damage and if a request touches you then you will take damage")
 		elif !text_13_displayed:
 			text_13_displayed = true
-			playPlayerMessage("if you fall off the screen then then you will also take some damage but for now you are safe")
+			playPlayerMessage("if you fall off the screen then you will also take some damage but for now you are safe")
 		elif !text_14_displayed:
 			text_14_displayed = true
 			playPlayerMessage("if you or ars takes too much damage then ars will get overwhelmed with requests and you will fail your mission")
