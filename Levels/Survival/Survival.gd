@@ -42,6 +42,7 @@ func _ready() -> void:
 	$RequestSpawner.connect("wave_complete", self, "_onWaveComplete")
 	$WaveTimer.connect("timeout", self, "_onWaveTimerTimeout")
 	$SecondTimer.connect("timeout", self, "_onSecondTimerTimeout")
+	$BackgroundMusic.connect("finished", self, "_onBackgroundMusicFinished")
 	$WaveTimer.one_shot = true
 	$SecondTimer.one_shot = false
 	$GUI/Shop.hide()
@@ -52,10 +53,15 @@ func _ready() -> void:
 	nextWave()
 	
 func _onPlayerDead() -> void:
+	$BackgroundMusic.stop()
 	game_over = true
 	player_dead = true
 	
+func _onBackgroundMusicFinished() -> void:
+	$BackgroundMusic.play()
+	
 func _onPlayerDeadAndGone() -> void:
+	$BackgroundMusic.stop()
 	# spawn a bunch of requests to kill ARS if it's not dead already
 	if !ars_dead:
 		gameState.playerPosition = $ARS.position
@@ -63,6 +69,7 @@ func _onPlayerDeadAndGone() -> void:
 		$RequestSpawner.start(0.001, $ARS.position, 20, 4)
 	
 func _onARSDead() -> void:
+	$BackgroundMusic.stop()
 	game_over = true
 	ars_dead = true
 	$RequestSpawner.stop()

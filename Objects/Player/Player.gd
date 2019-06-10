@@ -75,6 +75,7 @@ func _ready() -> void:
 #-----------------------------------------------------------------------------------	
 func respawn() -> void:
 	gameState.updatePlayerHealth(-fall_damage)
+	$Sounds/FallOff.play()
 	if gameState.playerHealth > 0:
 		velocity = Vector2()
 		position = START_POS
@@ -102,6 +103,7 @@ func getInput() -> void:
 		jumping = true
 		velocity.y = initial_jump_speed
 		$AnimatedSprite.play("Jumping")
+		playJumpSound()
 	# if player holds the jump key, add additional velocity until the max is reached
 	elif jump and jumping and velocity.y > max_jump_speed:
 		velocity.y 	+= additional_jump_speed
@@ -113,16 +115,19 @@ func getInput() -> void:
 		$AnimatedSprite.playing = false
 		$AnimatedSprite.frame = 0
 		$AnimatedSprite.play("Jumping")
+		playDoubleJumpSound()
 		dashing = true
 		velocity.y = dash_speed
 		
 	if left:
 		velocity.x -= speed
 		if is_on_floor() and !(jumping or dashing):
+			playFootstepsSound()
 			$AnimatedSprite.play("Running")
 	if right:
 		velocity.x += speed
 		if is_on_floor() and !(jumping or dashing):
+			playFootstepsSound()
 			$AnimatedSprite.play("Running")
 			
 	if is_on_floor() and !(left or right) and !(jumping or dashing):
@@ -133,6 +138,46 @@ func _onPlayerDead() -> void:
 	dead = true
 	$CollisionShape2D.call_deferred("set_disabled", true)
 	$Hitbox/CollisionShape2D.call_deferred("set_disabled", true)
+	
+func playJumpSound() -> void:
+	if cur_jump_level == 0:
+		$Sounds/Jump/Jump1.play()
+	elif cur_jump_level == 1:
+		$Sounds/Jump/Jump2.play()
+	elif cur_jump_level == 2:
+		$Sounds/Jump/Jump3.play()
+	elif cur_jump_level == 3:
+		$Sounds/Jump/Jump4.play()
+	
+func playShootSound() -> void:
+	if cur_shoot_level == 0:
+		$Sounds/Shoot/Shoot1.play()
+	elif cur_jump_level == 1:
+		$Sounds/Shoot/Shoot2.play()
+	elif cur_jump_level == 2:
+		$Sounds/Shoot/Shoot3.play()
+	elif cur_jump_level == 3:
+		$Sounds/Shoot/Shoot4.play()
+	
+func playDoubleJumpSound() -> void:
+	if cur_jump_level == 0:
+		$Sounds/DoubleJump/DoubleJump1.play()
+	elif cur_jump_level == 1:
+		$Sounds/DoubleJump/DoubleJump2.play()
+	elif cur_jump_level == 2:
+		$Sounds/DoubleJump/DoubleJump3.play()
+	elif cur_jump_level == 3:
+		$Sounds/DoubleJump/DoubleJump4.play()
+	
+func playFootstepsSound() -> void:
+	if cur_speed_level == 0 and !$Sounds/Footsteps/Footsteps1.playing:
+		$Sounds/Footsteps/Footsteps1.play()
+	elif cur_speed_level == 1 and !$Sounds/Footsteps/Footsteps2.playing:
+		$Sounds/Footsteps/Footsteps2.play()
+	elif cur_speed_level == 2 and !$Sounds/Footsteps/Footsteps3.playing: 
+		$Sounds/Footsteps/Footsteps3.play()
+	elif cur_speed_level == 3 and !$Sounds/Footsteps/Footsteps4.playing:
+		$Sounds/Footsteps/Footsteps4.play()
 	
 # _physics_process -----------------------------------------------------------------
 # Description:
@@ -183,6 +228,7 @@ func _onBodyEntered(body : PhysicsBody2D) -> void:
 	request.kill()
 		
 func hit(damage : int) -> void:
+	$Sounds/Hit.play()
 	gameState.updatePlayerHealth(-damage)
 		
 func update_orientation(left: bool, right: bool) -> void:
@@ -202,6 +248,7 @@ func shoot(target: Vector2) -> void:
 	var bullet = Bullet.instance() as Bullet
 	get_parent().add_child(bullet)
 	bullet.spawn(target, spawn_position, cur_shoot_level)
+	playShootSound()
 	if cur_shoot_level > 1:
 		var bullet2 = Bullet.instance() as Bullet
 		get_parent().add_child(bullet2)

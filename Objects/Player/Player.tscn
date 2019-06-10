@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Objects/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Bullet/Bullet.tscn" type="PackedScene" id=2]
@@ -21,6 +21,24 @@
 [ext_resource path="res://Resources/Sprites/Player/ARSPlayer17.png" type="Texture" id=19]
 [ext_resource path="res://Resources/Sprites/Player/ARSPlayer18.png" type="Texture" id=20]
 [ext_resource path="res://Resources/Sprites/Player/ARSPlayer19.png" type="Texture" id=21]
+[ext_resource path="res://Resources/Sounds/jump_1.wav" type="AudioStream" id=22]
+[ext_resource path="res://Resources/Sounds/jump_2.wav" type="AudioStream" id=23]
+[ext_resource path="res://Resources/Sounds/jump_3.wav" type="AudioStream" id=24]
+[ext_resource path="res://Resources/Sounds/jump_4.wav" type="AudioStream" id=25]
+[ext_resource path="res://Resources/Sounds/double_jump_1.wav" type="AudioStream" id=26]
+[ext_resource path="res://Resources/Sounds/double_jump_2.wav" type="AudioStream" id=27]
+[ext_resource path="res://Resources/Sounds/double_jump_3.wav" type="AudioStream" id=28]
+[ext_resource path="res://Resources/Sounds/double_jump_4.wav" type="AudioStream" id=29]
+[ext_resource path="res://Resources/Sounds/shoot_1.wav" type="AudioStream" id=30]
+[ext_resource path="res://Resources/Sounds/shoot_2.wav" type="AudioStream" id=31]
+[ext_resource path="res://Resources/Sounds/shoot_3.wav" type="AudioStream" id=32]
+[ext_resource path="res://Resources/Sounds/shoot_4.wav" type="AudioStream" id=33]
+[ext_resource path="res://Resources/Sounds/footsteps_1.wav" type="AudioStream" id=34]
+[ext_resource path="res://Resources/Sounds/footsteps_2.wav" type="AudioStream" id=35]
+[ext_resource path="res://Resources/Sounds/footsteps_3.wav" type="AudioStream" id=36]
+[ext_resource path="res://Resources/Sounds/footsteps_4.wav" type="AudioStream" id=37]
+[ext_resource path="res://Resources/Sounds/player_gets_hit.wav" type="AudioStream" id=38]
+[ext_resource path="res://Resources/Sounds/player_falls_off.wav" type="AudioStream" id=39]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.6664, 50.3149 )
@@ -72,4 +90,73 @@ position = Vector2( 0, -30.1517 )
 
 [node name="Eye2" type="Position2D" parent="."]
 position = Vector2( 11.9686, -30.2668 )
+
+[node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="Jump" type="Node" parent="Sounds"]
+editor/display_folded = true
+
+[node name="Jump1" type="AudioStreamPlayer" parent="Sounds/Jump"]
+stream = ExtResource( 22 )
+
+[node name="Jump2" type="AudioStreamPlayer" parent="Sounds/Jump"]
+stream = ExtResource( 23 )
+
+[node name="Jump3" type="AudioStreamPlayer" parent="Sounds/Jump"]
+stream = ExtResource( 24 )
+
+[node name="Jump4" type="AudioStreamPlayer" parent="Sounds/Jump"]
+stream = ExtResource( 25 )
+
+[node name="DoubleJump" type="Node" parent="Sounds"]
+editor/display_folded = true
+
+[node name="DoubleJump1" type="AudioStreamPlayer" parent="Sounds/DoubleJump"]
+stream = ExtResource( 26 )
+
+[node name="DoubleJump2" type="AudioStreamPlayer" parent="Sounds/DoubleJump"]
+stream = ExtResource( 27 )
+
+[node name="DoubleJump3" type="AudioStreamPlayer" parent="Sounds/DoubleJump"]
+stream = ExtResource( 28 )
+
+[node name="DoubleJump4" type="AudioStreamPlayer" parent="Sounds/DoubleJump"]
+stream = ExtResource( 29 )
+
+[node name="Shoot" type="Node" parent="Sounds"]
+editor/display_folded = true
+
+[node name="Shoot1" type="AudioStreamPlayer" parent="Sounds/Shoot"]
+stream = ExtResource( 30 )
+
+[node name="Shoot2" type="AudioStreamPlayer" parent="Sounds/Shoot"]
+stream = ExtResource( 31 )
+
+[node name="Shoot3" type="AudioStreamPlayer" parent="Sounds/Shoot"]
+stream = ExtResource( 32 )
+
+[node name="Shoot4" type="AudioStreamPlayer" parent="Sounds/Shoot"]
+stream = ExtResource( 33 )
+
+[node name="Footsteps" type="Node" parent="Sounds"]
+editor/display_folded = true
+
+[node name="Footsteps1" type="AudioStreamPlayer" parent="Sounds/Footsteps"]
+stream = ExtResource( 34 )
+
+[node name="Footsteps2" type="AudioStreamPlayer" parent="Sounds/Footsteps"]
+stream = ExtResource( 35 )
+
+[node name="Footsteps3" type="AudioStreamPlayer" parent="Sounds/Footsteps"]
+stream = ExtResource( 36 )
+
+[node name="Footsteps4" type="AudioStreamPlayer" parent="Sounds/Footsteps"]
+stream = ExtResource( 37 )
+
+[node name="Hit" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 38 )
+
+[node name="FallOff" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 39 )
 
