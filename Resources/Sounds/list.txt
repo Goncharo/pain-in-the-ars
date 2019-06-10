@@ -1,8 +1,7 @@
 Sounds required - MP3
 intro_snare.wav 	used for the PAIN IN THE
 intro_drop.wav 		used for the ARS
-intro_letter_drop.wav
-letter_highscore.wav when game starts make title more interactive. Stabbing sounds when the letters come up, like punch or heavy landing sound
+letter_highscore.wav
 button_click_1.wav click sound - snare sound with high freq stab
 jump_1.wav - person sound - ugh
 jump_2.wav

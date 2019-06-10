@@ -86,12 +86,13 @@ func hit(damage: int) -> void:
 	if health == 0:
 		kill(true)
 	else:
-		pass
+		$Sounds/BulletImpact.play()
 
 func _onScreenExited() -> void:
 	queue_free()
 	
 func kill(bullet: bool = false) -> void:
+	$Sounds/Explode.play()
 	if(bullet):
 		gameState.updatePlayerSkrilla(reward)
 	$Glow.visible = false

@@ -152,11 +152,11 @@ func playJumpSound() -> void:
 func playShootSound() -> void:
 	if cur_shoot_level == 0:
 		$Sounds/Shoot/Shoot1.play()
-	elif cur_jump_level == 1:
+	elif cur_shoot_level == 1:
 		$Sounds/Shoot/Shoot2.play()
-	elif cur_jump_level == 2:
+	elif cur_shoot_level == 2:
 		$Sounds/Shoot/Shoot3.play()
-	elif cur_jump_level == 3:
+	elif cur_shoot_level == 3:
 		$Sounds/Shoot/Shoot4.play()
 	
 func playDoubleJumpSound() -> void:

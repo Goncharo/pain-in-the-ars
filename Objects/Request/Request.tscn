@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Objects/Request/Request.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=2]
+[ext_resource path="res://Resources/Sounds/bullet_impact_request.wav" type="AudioStream" id=3]
+[ext_resource path="res://Resources/Sounds/request_explode.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 23
@@ -31,7 +33,6 @@ color = Color( 0.972549, 0.243137, 0.243137, 1 )
 [node name="Request" type="RigidBody2D" groups=[
 "requests",
 ]]
-editor/display_folded = true
 collision_layer = 2
 collision_mask = 0
 gravity_scale = 0.0
@@ -97,4 +98,13 @@ one_shot = true
 explosiveness = 0.9
 randomness = 1.0
 process_material = SubResource( 4 )
+
+[node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
+
+[node name="BulletImpact" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 3 )
+
+[node name="Explode" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 4 )
 

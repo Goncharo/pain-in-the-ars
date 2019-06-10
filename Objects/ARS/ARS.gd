@@ -41,6 +41,7 @@ func _onBodyEntered(body : PhysicsBody2D) -> void:
 		return
 	var bullet := body as Bullet
 	if bullet:
+		$Sounds/BulletImpact.play()
 		bullet.kill()
 		
 	var request := body as Request
