@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://GUI/MainMenu/MainMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Resources/Sounds/button_click_1.wav" type="AudioStream" id=3]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,4 +14,7 @@ margin_left = 0.0
 margin_top = 0.0
 margin_right = 0.0
 margin_bottom = 0.0
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 

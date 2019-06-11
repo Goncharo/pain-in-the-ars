@@ -110,19 +110,25 @@ func playPlayerMessage(message: String) -> void:
 	waiting_for_input = false
 	$MessageBox.text = ""
 	for i in range(message.length()):
+		if !$TextSound.playing:
+			$TextSound.play()
 		yield(get_tree().create_timer(0.05), "timeout")
 		$MessageBox.text += message[i]
+	$TextSound.stop()
 	waiting_for_input = true
 	flashWaitingSymbol()
 	
 func toggleShop() -> void:
 	if shop_open:
+		$ShopCloseSound.play()
 		$GUI/Shop.hide()
 		$GUI/HUD.show()
 	else:
+		$ShopOpenSound.play()
 		$GUI/HUD.hide()
 		$GUI/Shop.show()
 	shop_open = !shop_open
+	gameState.shop_open = shop_open
 	
 func spawnRequest(target, pos, speed, type) -> void:
 	var request_instance = request.instance() as Request

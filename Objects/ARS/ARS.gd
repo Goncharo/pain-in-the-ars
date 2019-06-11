@@ -10,7 +10,6 @@ func _ready() -> void:
 	connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
 	gameState.connect("ars_dead", self, "_onARSDead")
-	$AnimatedSprite.play("Boot")
 
 func playBootAnim() -> void:
 	$AnimatedSprite.animation = "Boot"
@@ -26,8 +25,9 @@ func _onARSDead():
 	dead = true
 	$AnimatedSprite.visible = false
 	$CollisionShape2D.call_deferred("set_disabled", true)
+	$Sounds/ARSDead.play()
 	$Explosion.emitting = true
-	yield(get_tree().create_timer(5), "timeout")
+	yield(get_tree().create_timer(4), "timeout")
 	queue_free()
 	
 func disableCollisions():

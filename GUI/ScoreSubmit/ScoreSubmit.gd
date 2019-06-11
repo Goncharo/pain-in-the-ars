@@ -12,9 +12,12 @@ func _ready():
 	sceneManager = get_node("/root/SceneManager")
 	$HTTPRequest.connect("request_completed", self, "_on_HTTPRequest_request_completed")
 	$VBoxContainer/MarginContainer/SubmitButton.connect("pressed", self, "_onSubmitPressed")
+	$BackgroundMusic.connect("finished", self, "_onBackgroundMusicFinished")
 	yield(get_tree().create_timer(0.5), "timeout")
+	$TextHitSound.play()
 	$VBoxContainer/HBoxContainer/Game.show()
 	yield(get_tree().create_timer(0.5), "timeout")
+	$TextHitSound.play()
 	$VBoxContainer/HBoxContainer/Over.show()
 	yield(get_tree().create_timer(0.5), "timeout")
 	$VBoxContainer/HBoxContainer2/Score.show()
@@ -23,15 +26,23 @@ func _ready():
 	$VBoxContainer/HBoxContainer2/ScoreNum.text = str(curScore)
 	$VBoxContainer/HBoxContainer2/ScoreNum.show()
 	for i in range(100):
+		if !$CountSound.playing:
+			$CountSound.play()
 		yield(get_tree().create_timer(0.01), "timeout")
 		curScore += numToIncrement
 		var numToSet = min(gameState.playerScore, curScore)
 		$VBoxContainer/HBoxContainer2/ScoreNum.text = str(numToSet)
 		if numToSet == gameState.playerScore:
 			break
+	$CountSound.stop()
+	$CountEndSound.play()
+	yield(get_tree().create_timer(0.5), "timeout")
+	$BackgroundMusic.play()
 	$VBoxContainer/HBoxContainer3.show()
 	$VBoxContainer/MarginContainer.show()
 	
+func _onBackgroundMusicFinished() -> void:
+	$BackgroundMusic.play()
 	
 func startWaitUpdate() -> void:
 	while waiting:
@@ -41,6 +52,7 @@ func startWaitUpdate() -> void:
 
 func _onSubmitPressed() -> void:
 	# submit score to server
+	$ButtonSound.play()
 	$VBoxContainer/MarginContainer/SubmitButton.hide()
 	$VBoxContainer/MarginContainer/Status.text = "Submitting"
 	$VBoxContainer/MarginContainer/Status.show()

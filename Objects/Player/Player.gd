@@ -282,7 +282,7 @@ func _onUpgradePlayerAbility(abilityName: String) -> void:
 		cur_jump_level += 1
 		
 func _input(event):
-	if dead:
+	if dead or gameState.shop_open:
 		return
 	if event is InputEventScreenTouch and event.pressed:
 		shoot(event.position)

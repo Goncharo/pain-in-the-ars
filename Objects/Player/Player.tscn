@@ -3,24 +3,24 @@
 [ext_resource path="res://Objects/Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Bullet/Bullet.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Resources/Sprites/Player/ARSPlayer1.png" type="Texture" id=3]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer2.png" type="Texture" id=4]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer3.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer4.png" type="Texture" id=6]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer5.png" type="Texture" id=7]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer6.png" type="Texture" id=8]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer7.png" type="Texture" id=9]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer8.png" type="Texture" id=10]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer9.png" type="Texture" id=11]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer10.png" type="Texture" id=12]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer11.png" type="Texture" id=13]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer12.png" type="Texture" id=14]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer13.png" type="Texture" id=15]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer14.png" type="Texture" id=16]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer15.png" type="Texture" id=17]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer16.png" type="Texture" id=18]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer17.png" type="Texture" id=19]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer18.png" type="Texture" id=20]
-[ext_resource path="res://Resources/Sprites/Player/ARSPlayer19.png" type="Texture" id=21]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer13.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer14.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer15.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer16.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer17.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer18.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer19.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer2.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer3.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer4.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer5.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer6.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer7.png" type="Texture" id=16]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer8.png" type="Texture" id=17]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer9.png" type="Texture" id=18]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer10.png" type="Texture" id=19]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer11.png" type="Texture" id=20]
+[ext_resource path="res://Resources/Sprites/Player/ARSPlayer12.png" type="Texture" id=21]
 [ext_resource path="res://Resources/Sounds/jump_1.wav" type="AudioStream" id=22]
 [ext_resource path="res://Resources/Sounds/jump_2.wav" type="AudioStream" id=23]
 [ext_resource path="res://Resources/Sounds/jump_3.wav" type="AudioStream" id=24]
@@ -38,7 +38,7 @@
 [ext_resource path="res://Resources/Sounds/footsteps_3.wav" type="AudioStream" id=36]
 [ext_resource path="res://Resources/Sounds/footsteps_4.wav" type="AudioStream" id=37]
 [ext_resource path="res://Resources/Sounds/player_gets_hit.wav" type="AudioStream" id=38]
-[ext_resource path="res://Resources/Sounds/player_falls_off.wav" type="AudioStream" id=39]
+[ext_resource path="res://Resources/Sounds/request_explode.wav" type="AudioStream" id=39]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 15.6664, 50.3149 )
@@ -48,14 +48,14 @@ extents = Vector2( 15.9882, 50.3149 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "Running",
-"speed": 30.0
-}, {
-"frames": [ ExtResource( 3 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "Jumping",
+"speed": 30.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "Running",
 "speed": 30.0
 } ]
 
@@ -124,19 +124,22 @@ stream = ExtResource( 28 )
 stream = ExtResource( 29 )
 
 [node name="Shoot" type="Node" parent="Sounds"]
-editor/display_folded = true
 
 [node name="Shoot1" type="AudioStreamPlayer" parent="Sounds/Shoot"]
 stream = ExtResource( 30 )
+volume_db = -1.0
 
 [node name="Shoot2" type="AudioStreamPlayer" parent="Sounds/Shoot"]
 stream = ExtResource( 31 )
+volume_db = -1.0
 
 [node name="Shoot3" type="AudioStreamPlayer" parent="Sounds/Shoot"]
 stream = ExtResource( 32 )
+volume_db = -1.0
 
 [node name="Shoot4" type="AudioStreamPlayer" parent="Sounds/Shoot"]
 stream = ExtResource( 33 )
+volume_db = -1.0
 
 [node name="Footsteps" type="Node" parent="Sounds"]
 editor/display_folded = true
@@ -155,7 +158,9 @@ stream = ExtResource( 37 )
 
 [node name="Hit" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 38 )
+volume_db = -4.0
 
 [node name="FallOff" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 39 )
+volume_db = -2.0
 

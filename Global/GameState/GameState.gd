@@ -33,6 +33,8 @@ export var arsMaxHealth = 100
 export var arsHealthUpgrade = 50
 
 var wave_in_progress = false
+var shop_open = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

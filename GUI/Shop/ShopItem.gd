@@ -43,6 +43,7 @@ func update(unused: int = -1) -> void:
 	
 	
 func _onUpgradePressed() -> void:
+	$UpgradeSound.play()
 	gameState.upgradeAbility(itemName, itemLevels[curItemLevel].nextLevelCost)
 	curItemLevel += 1
 	update()

@@ -13,12 +13,18 @@ func _ready() -> void:
 	$GUI/MainMenu/VBoxContainer/Buttons/MarginContainer3/TutorialButton.connect("pressed", self, "startTutorial")
 	
 func startGame() -> void:
+	$ButtonSound.play()
+	yield(get_tree().create_timer(0.5), "timeout")
 	sceneManager.goto_scene(_getLevelPath("Survival"))
 	
 func startTutorial() -> void:
+	$ButtonSound.play()
+	yield(get_tree().create_timer(0.5), "timeout")
 	sceneManager.goto_scene(_getLevelPath("Tutorial"))
 	
 func openHighscores() -> void:
+	$ButtonSound.play()
+	yield(get_tree().create_timer(0.5), "timeout")
 	sceneManager.goto_scene("res://GUI/Highscores/Highscores.tscn")
 
 func _getLevelPath(levelName: String) -> String:

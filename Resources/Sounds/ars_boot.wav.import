@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ars_boot.wav-82c154254ae69d06d17fd88e04683baa.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/ars_boot.wav"
+dest_files=[ "res://.import/ars_boot.wav-82c154254ae69d06d17fd88e04683baa.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

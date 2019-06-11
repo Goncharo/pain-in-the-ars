@@ -14,10 +14,15 @@ func _ready():
 	sceneManager = get_node("/root/SceneManager")
 	$HTTPRequest.connect("request_completed", self, "_on_HTTPRequest_request_completed")
 	$VBoxContainer/Button/MarginContainer/MainMenuButton.connect("pressed", self, "_onMainMenuButtonPressed")
+	$BackgroundMusic.play()
+	$BackgroundMusic.connect("finished", self, "_onBackgroundMusicFinished")
 	$VBoxContainer/Text/HighscoresText.text= "Loading"
 	$VBoxContainer/Text.show()
 	startWaitUpdate()
 	$HTTPRequest.request(apiURL)
+
+func _onBackgroundMusicFinished() -> void:
+	$BackgroundMusic.play()
 	
 func startWaitUpdate() -> void:
 	while waiting:
@@ -26,6 +31,8 @@ func startWaitUpdate() -> void:
 		$VBoxContainer/Text/HighscoresText.text += " 0"
 
 func _onMainMenuButtonPressed() -> void:
+	$ButtonSound.play()
+	yield(get_tree().create_timer(0.5), "timeout")
 	sceneManager.goto_scene("res://Main.tscn")
 	
 func addScoreItem(number: String, playerName: String, score: String) -> void:
@@ -46,7 +53,7 @@ func populateHighScores(body) -> void:
 	
 func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 	waiting = false
-	if result == $HTTPRequest.RESULT_SUCCESS and response_code == 200:
+	if result == $HTTPRequest.RESULT_SUCCESS and response_code == 200: 
 		$VBoxContainer/Text/HighscoresText.text = "Highscores"
 		populateHighScores(body)
 	else:

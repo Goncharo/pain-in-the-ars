@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
 [ext_resource path="res://GUI/Shop/ShopItem.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://Resources/Sounds/upgrade_sound.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -92,4 +93,7 @@ margin_top = -25.0
 margin_bottom = 25.0
 custom_fonts/font = SubResource( 6 )
 text = "UPGRADE"
+
+[node name="UpgradeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
 

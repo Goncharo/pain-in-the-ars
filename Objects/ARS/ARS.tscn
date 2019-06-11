@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Objects/ARS/ARS.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/ARS/ARS1.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://Resources/Sprites/ARS/ARS16.png" type="Texture" id=17]
 [ext_resource path="res://Resources/Sprites/ARS/ARS17.png" type="Texture" id=18]
 [ext_resource path="res://Resources/Sounds/bullet_impact_ars.wav" type="AudioStream" id=19]
+[ext_resource path="res://Resources/Sounds/ars_explodes.wav" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 176.392, 175.95 )
@@ -75,11 +76,15 @@ process_material = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
 frames = SubResource( 3 )
-animation = "Boot"
+animation = "Hit"
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="BulletImpact" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
+volume_db = -1.0
+
+[node name="ARSDead" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
+volume_db = 4.0
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Levels/Tutorial/Tutorial.gd" type="Script" id=1]
 [ext_resource path="res://Objects/Request/Request.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 [ext_resource path="res://Objects/ARS/ARS.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Objects/PowerOfX/PowerOfX.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Objects/Player/Player.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/Sounds/text_sound.wav" type="AudioStream" id=11]
+[ext_resource path="res://Resources/Sounds/purchase_screen_close.wav" type="AudioStream" id=12]
+[ext_resource path="res://Resources/Sounds/purchase_screen_open.wav" type="AudioStream" id=13]
 
 [node name="Tutorial" type="Node2D"]
 script = ExtResource( 1 )
@@ -78,4 +81,14 @@ position = Vector2( 1820, 500 )
 
 [node name="RequestSpawnPos4" type="Position2D" parent="."]
 position = Vector2( 1820, 660 )
+
+[node name="TextSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = -2.0
+
+[node name="ShopOpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="ShopCloseSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
 

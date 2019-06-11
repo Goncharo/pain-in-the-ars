@@ -3,7 +3,7 @@
 [ext_resource path="res://Objects/Request/Request.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=2]
 [ext_resource path="res://Resources/Sounds/bullet_impact_request.wav" type="AudioStream" id=3]
-[ext_resource path="res://Resources/Sounds/request_explode.wav" type="AudioStream" id=4]
+[ext_resource path="res://Resources/Sounds/player_falls_off.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 23
@@ -100,11 +100,11 @@ randomness = 1.0
 process_material = SubResource( 4 )
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="BulletImpact" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 3 )
 
 [node name="Explode" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 4 )
+volume_db = 4.0
 

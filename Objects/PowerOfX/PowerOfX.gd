@@ -23,6 +23,7 @@ func _onPowerOfXUsed(tutorialMode: bool) -> void:
 		# Howard appears on sceen, causes damage to player and ARS
 		$Label.visible = true # TODO: REMOVE 
 		$Label.text = "HOWARD" # TODO: REMOVE 
+		$HowardSound.play()
 		yield(get_tree().create_timer(1), "timeout")
 		$Label.visible = false # TODO: REMOVE 
 		gameState.updateARSHealth(-howard_damage)
@@ -31,6 +32,7 @@ func _onPowerOfXUsed(tutorialMode: bool) -> void:
 		# Dan appears on screen, destroys all requests currently on screen
 		$Label.visible = true # TODO: REMOVE 
 		$Label.text = "DAN" # TODO: REMOVE 
+		$DanSound.play()
 		yield(get_tree().create_timer(1), "timeout")
 		for request in get_tree().get_root().get_tree().get_nodes_in_group("requests"):
 			request.kill()

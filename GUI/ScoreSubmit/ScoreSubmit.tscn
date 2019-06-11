@@ -1,8 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Resources/Themes/Default.theme" type="Theme" id=1]
 [ext_resource path="res://GUI/ScoreSubmit/ScoreSubmit.gd" type="Script" id=2]
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=3]
+[ext_resource path="res://Resources/Sounds/button_click_1.wav" type="AudioStream" id=4]
+[ext_resource path="res://Resources/Sounds/highscore_count.wav" type="AudioStream" id=5]
+[ext_resource path="res://Resources/Sounds/highscore_end.wav" type="AudioStream" id=6]
+[ext_resource path="res://Resources/Sounds/letter_highscore.wav" type="AudioStream" id=7]
+[ext_resource path="res://Resources/Sounds/intro_snare.wav" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 150
@@ -156,4 +161,19 @@ margin_bottom = 79.0
 custom_fonts/font = SubResource( 7 )
 align = 1
 valign = 1
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="CountSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="CountEndSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="TextHitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
 

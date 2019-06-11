@@ -48,14 +48,15 @@ func _ready() -> void:
 	$GUI/Shop.hide()
 	$GUI/Shop.initShopItems()
 	$GUI/HUD.show()
-	$GUI/ScoreSubmit.hide()
 	gameState.reset_stats()
 	nextWave()
 	
 func _onPlayerDead() -> void:
-	$BackgroundMusic.stop()
-	game_over = true
-	player_dead = true
+	if !player_dead:
+		$BackgroundMusic.stop()
+		$PlayerDeadSound.play()
+		game_over = true
+		player_dead = true
 	
 func _onBackgroundMusicFinished() -> void:
 	$BackgroundMusic.play()
@@ -81,12 +82,13 @@ func _onARSDead() -> void:
 			var wr = weakref(request)
 			if wr.get_ref():
 				wr.get_ref().kill()
-	yield(get_tree().create_timer(4), "timeout")
+	yield(get_tree().create_timer(3), "timeout")
 	game_over()
 
 func _onSecondTimerTimeout() -> void:
 	if game_over:
 		return
+	$CountdownSound.play()
 	gameState.updatePlayerMessage("NEXT WAVE    " + String(int($WaveTimer.time_left)))
 
 func _onWaveTimerTimeout() -> void:
@@ -99,6 +101,7 @@ func _onWaveTimerTimeout() -> void:
 func _onWaveComplete() -> void:
 	if game_over:
 		return
+	$BackgroundMusic.bus = "Filter"
 	$WaveTimer.start(wave_wait_time)
 	$SecondTimer.start(1)
 	gameState.reset_stats()
@@ -115,6 +118,7 @@ func nextWave() -> void:
 	gameState.wave_in_progress = true
 	$GUI/Shop.hide()
 	$GUI/HUD.show()
+	$BackgroundMusic.bus = "Master"
 	cur_wave += 1
 	if(cur_wave == 1):
 		cur_num_requests = initial_num_requests
@@ -131,10 +135,13 @@ func toggleShop() -> void:
 	if shop_open:
 		$GUI/Shop.hide()
 		$GUI/HUD.show()
+		$ShopCloseSound.play()
 	else:
 		$GUI/HUD.hide()
 		$GUI/Shop.show()
+		$ShopOpenSound.play()
 	shop_open = !shop_open
+	gameState.shop_open = shop_open
 	
 func game_over() -> void:
 	sceneManager.goto_scene("res://GUI/ScoreSubmit/ScoreSubmit.tscn")
