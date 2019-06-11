@@ -11,7 +11,7 @@ router.post('/highscore/:name/:score', function(req, res){
         return res.status(400).send('Bad request');
     }
 
-    var highscore = new Highscore({name: name, score: score});
+    var highscore = new Highscore({name: name, score: Number(score)});
     highscore.save((err) => {
         if (err){
             console.error(err);

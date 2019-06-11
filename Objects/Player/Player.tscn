@@ -124,6 +124,7 @@ stream = ExtResource( 28 )
 stream = ExtResource( 29 )
 
 [node name="Shoot" type="Node" parent="Sounds"]
+editor/display_folded = true
 
 [node name="Shoot1" type="AudioStreamPlayer" parent="Sounds/Shoot"]
 stream = ExtResource( 30 )
@@ -138,6 +139,7 @@ stream = ExtResource( 32 )
 stream = ExtResource( 33 )
 
 [node name="Footsteps" type="Node" parent="Sounds"]
+editor/display_folded = true
 
 [node name="Footsteps1" type="AudioStreamPlayer" parent="Sounds/Footsteps"]
 stream = ExtResource( 34 )

@@ -37,10 +37,12 @@ func populateHighScores(body) -> void:
 	var highscores = JSON.parse(body.get_string_from_utf8()).result
 	var cur_num = 1
 	for highscore in highscores:
-		addScoreItem(str(cur_num), highscore.name, highscore.score)
+		addScoreItem(str(cur_num), highscore.name, str(highscore.score))
 		cur_num += 1
-	for remainingIndex in range(num_to_query - cur_num):
-		addScoreItem(str(remainingIndex), "NOT SET", str(0))
+	var remainingRange = num_to_query - cur_num + 1
+	for remainingIndex in range(num_to_query - cur_num + 1):
+		addScoreItem(str(cur_num), "NOT SET", str(0))
+		cur_num += 1
 	
 func _on_HTTPRequest_request_completed( result, response_code, headers, body ):
 	waiting = false
