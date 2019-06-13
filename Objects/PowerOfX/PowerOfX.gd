@@ -6,7 +6,6 @@ export var howard_damage = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label.visible = false # TODO: REMOVE
 	gameState = get_node("/root/GameState")
 	gameState.connect("power_of_x_used", self, "_onPowerOfXUsed")
 	
@@ -21,22 +20,20 @@ func _onPowerOfXUsed(tutorialMode: bool) -> void:
 	
 	if num == 1:
 		# Howard appears on sceen, causes damage to player and ARS
-		$Label.visible = true # TODO: REMOVE 
-		$Label.text = "HOWARD" # TODO: REMOVE 
+		$Howard.visible = true
 		$HowardSound.play()
 		yield(get_tree().create_timer(1), "timeout")
-		$Label.visible = false # TODO: REMOVE 
+		$Howard.visible = false
 		gameState.updateARSHealth(-howard_damage)
 		gameState.updatePlayerHealth(-howard_damage)
 	else:
 		# Dan appears on screen, destroys all requests currently on screen
-		$Label.visible = true # TODO: REMOVE 
-		$Label.text = "DAN" # TODO: REMOVE 
+		$Dan.visible = true
 		$DanSound.play()
 		yield(get_tree().create_timer(1), "timeout")
 		for request in get_tree().get_root().get_tree().get_nodes_in_group("requests"):
 			request.kill()
-		$Label.visible = false # TODO: REMOVE
+		$Dan.visible = false
 		
 	gameState.power_of_x_in_progress = false
 

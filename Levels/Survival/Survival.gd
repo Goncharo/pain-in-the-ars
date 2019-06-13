@@ -10,10 +10,10 @@ export var min_spawn_speed: float = 0.2
 export var additional_speed: float = -0.1
 
 export var initial_request_speed_mult: float = 1.0
-export var max_request_speed_mult: float = 3.0
+export var max_request_speed_mult: float = 2
 export var additional_request_speed: float = 0.15
 
-export var initial_num_requests: int = 20
+export var initial_num_requests: int = 25
 export var num_additional_requests: int = 5
 
 export var wave_wait_time: int = 10
@@ -150,6 +150,8 @@ func game_over() -> void:
 func _process(delta):
 	if game_over:
 		return
+	if Input.is_action_just_pressed("ui_cancel"):
+		sceneManager.goto_scene("res://Main.tscn")
 	if Input.is_action_just_pressed("open_shop") and shop_enabled:
 		toggleShop()
 	if Input.is_action_just_pressed("debug_mode"):
