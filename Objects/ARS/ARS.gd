@@ -2,6 +2,8 @@ extends Area2D
 
 class_name ARS
 
+signal boot_complete
+
 var gameState : GameState
 var dead = false
 
@@ -10,16 +12,26 @@ func _ready() -> void:
 	connect("body_entered", self, "_onBodyEntered")
 	gameState = get_node("/root/GameState")
 	gameState.connect("ars_dead", self, "_onARSDead")
+	$Sounds/Boot.connect("finished", self, "_onBootComplete")
+	
+	
+func setBootAnim() -> void:
+	$AnimatedSprite.animation = "Boot"
+	$AnimatedSprite.frame = 0
 
-func playBootAnim() -> void:
+func boot() -> void:
 	$AnimatedSprite.animation = "Boot"
 	$AnimatedSprite.frame = 0
 	$AnimatedSprite.play("Boot")
+	$Sounds/Boot.play()
 	
 func playHitAnim() -> void:
 	$AnimatedSprite.animation = "Hit"
 	$AnimatedSprite.frame = 0
 	$AnimatedSprite.play("Hit")
+	
+func _onBootComplete() -> void:
+	emit_signal("boot_complete")
 
 func _onARSDead():
 	dead = true

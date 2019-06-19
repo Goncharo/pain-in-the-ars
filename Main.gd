@@ -15,7 +15,7 @@ func _ready() -> void:
 func startGame() -> void:
 	$ButtonSound.play()
 	yield(get_tree().create_timer(0.5), "timeout")
-	sceneManager.goto_scene(_getLevelPath("Survival"))
+	sceneManager.goto_scene(_getLevelPath("Intro"))
 	
 func startTutorial() -> void:
 	$ButtonSound.play()

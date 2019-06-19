@@ -1,6 +1,8 @@
 extends TextEdit
 
 var waiting_for_input: bool = false
+var muted: bool = false
+var text_speed = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,9 +24,9 @@ func playPlayerMessage(message: String) -> void:
 	waiting_for_input = false
 	text = ""
 	for i in range(message.length()):
-		if !$TextSound.playing:
+		if !$TextSound.playing and !muted:
 			$TextSound.play()
-		yield(get_tree().create_timer(0.05), "timeout")
+		yield(get_tree().create_timer(text_speed), "timeout")
 		text += message[i]
 	$TextSound.stop()
 	waiting_for_input = true

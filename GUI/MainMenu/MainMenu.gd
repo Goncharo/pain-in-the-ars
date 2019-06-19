@@ -17,6 +17,10 @@ func _ready():
 	yield(get_tree().create_timer(2), "timeout")
 	$VBoxContainer/Buttons.show()
 	$FilteredBackgroundMusic.play()
+	$FilteredBackgroundMusic.connect("finished", self, "_onBackgroundMusicFinished")
+	
+func _onBackgroundMusicFinished() -> void:
+	$FilteredBackgroundMusic.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
