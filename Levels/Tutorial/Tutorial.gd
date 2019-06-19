@@ -5,7 +5,6 @@ export (PackedScene) var request
 var gameState: GameState
 var sceneManager: SceneManager
 
-var waiting_for_input = false
 var waiting_for_action = false
 
 # game description
@@ -15,12 +14,13 @@ var game_desc_displayed = false
 var movement_tutorial_complete = false
 var text_1_displayed = false
 var text_2_displayed = false
+var text_3_displayed = false
 var moved_left = false
 var moved_right = false
 
 # jumping tutorial
 var jumping_tutorial_complete = false
-var text_3_displayed = false
+
 var text_4_displayed = false
 var text_5_displayed = false
 var jumped = false
@@ -87,36 +87,11 @@ func _ready():
 	$GUI/HUD/PlayerScore.hide()
 	$ARS.hide()
 	$ARS.disableCollisions()
-	$MessageBox.text = ""
 	gameState.updatePlayerMessage("")
 	gameState.reset_stats()
 	gameState.tutorialMode = true
 	
-	playPlayerMessage("welcome to the tutorial please press enter to continue or press escape at any time to go back to the main menu")
-	
-func flashWaitingSymbol() -> void:
-	var flashed = true
-	while waiting_for_input:
-		yield(get_tree().create_timer(0.5), "timeout")
-		if !waiting_for_input:
-			return
-		flashed = !flashed
-		if flashed:
-			$MessageBox.text = $MessageBox.text.rstrip(" 0")
-		else:
-			$MessageBox.text += " 0"
-	
-func playPlayerMessage(message: String) -> void:
-	waiting_for_input = false
-	$MessageBox.text = ""
-	for i in range(message.length()):
-		if !$TextSound.playing:
-			$TextSound.play()
-		yield(get_tree().create_timer(0.05), "timeout")
-		$MessageBox.text += message[i]
-	$TextSound.stop()
-	waiting_for_input = true
-	flashWaitingSymbol()
+	$MessageBox.playPlayerMessage("welcome to the tutorial please press enter to continue or press escape at any time to go back to the main menu")
 	
 func toggleShop() -> void:
 	if shop_open:
@@ -139,15 +114,15 @@ func progressTutorial() -> void:
 	# game description
 	if !game_desc_displayed:
 		game_desc_displayed = true
-		playPlayerMessage("you are an ai tasked with the near impossible objective of keeping ars operational")
+		$MessageBox.playPlayerMessage("you are an ai tasked with the near impossible objective of keeping ars operational")
 	# movement tutorial
 	elif !movement_tutorial_complete:
 		if !text_1_displayed:
 			text_1_displayed = true
-			playPlayerMessage("if you think you are up to the task then you will first need to learn how to move")
+			$MessageBox.playPlayerMessage("if you think you are up to the task then you will first need to learn how to move")
 		elif !text_2_displayed:
 			text_2_displayed = true
-			playPlayerMessage("use the a key to move left and the d key to move right and give it a try  now")
+			$MessageBox.playPlayerMessage("use the a key to move left and the d key to move right and give it a try  now")
 			waiting_for_action = true
 		else:
 			if Input.is_action_just_pressed("ui_left"):
@@ -157,18 +132,18 @@ func progressTutorial() -> void:
 			if moved_left and moved_right:
 				movement_tutorial_complete = true
 				waiting_for_action = false
-				playPlayerMessage("excellent")
+				$MessageBox.playPlayerMessage("excellent")
 	# jumping tutorial
 	elif !jumping_tutorial_complete:
 		if !text_3_displayed:
 			text_3_displayed = true
-			playPlayerMessage("next you will learn how to jump")
+			$MessageBox.playPlayerMessage("next you will learn how to jump")
 		elif !text_4_displayed:
 			text_4_displayed = true
-			playPlayerMessage("to jump you can press and hold the space key and press it again mid air for a double jump")
+			$MessageBox.playPlayerMessage("to jump you can press and hold the space key and press it again mid air for a double jump")
 		elif !text_5_displayed:
 			text_5_displayed = true
-			playPlayerMessage("give it a try now and note that the longer you hold space the higher your initial jump will be")
+			$MessageBox.playPlayerMessage("give it a try now and note that the longer you hold space the higher your initial jump will be")
 			waiting_for_action = true
 		else:
 			if Input.is_action_just_pressed("ui_select"):
@@ -176,21 +151,21 @@ func progressTutorial() -> void:
 			if jumped:
 				jumping_tutorial_complete = true
 				waiting_for_action = false
-				playPlayerMessage("nice jumping")
+				$MessageBox.playPlayerMessage("nice jumping")
 	# shooting tutorial
 	elif !shooting_tutorial_complete:
 		if !text_6_displayed:
 			text_6_displayed = true
-			playPlayerMessage("next you will learn how to shoot")
+			$MessageBox.playPlayerMessage("next you will learn how to shoot")
 		elif !text_7_displayed:
 			text_7_displayed = true
-			playPlayerMessage("try it now by clicking the left mouse button and pointing at a location on the screen")
+			$MessageBox.playPlayerMessage("try it now by clicking the left mouse button and pointing at a location on the screen")
 			waiting_for_action = true
 		else:
 			if shot:
 				shooting_tutorial_complete = true
 				waiting_for_action = false
-				playPlayerMessage("fantastic shooting")
+				$MessageBox.playPlayerMessage("fantastic shooting")
 	# killing tutorial
 	elif !killing_tutorial_complete:
 		if !text_8_displayed:
@@ -198,18 +173,18 @@ func progressTutorial() -> void:
 			$ARS.enableCollisions()
 			$GUI/HUD/ARSHealth.show()
 			text_8_displayed = true
-			playPlayerMessage("this is ars the pride and joy of the ground segment")
+			$MessageBox.playPlayerMessage("this is ars the pride and joy of the ground segment")
 		elif !text_9_displayed:
 			text_9_displayed = true
-			playPlayerMessage("to keep ars operational you must ensure it does not receive too many requests")
+			$MessageBox.playPlayerMessage("to keep ars operational you must ensure it does not receive too many requests")
 		elif !text_10_displayed:
 			text_10_displayed = true
-			playPlayerMessage("to accomplish this you must shoot the requests and destroy them before they get to ars")
+			$MessageBox.playPlayerMessage("to accomplish this you must shoot the requests and destroy them before they get to ars")
 		elif !text_11_displayed:
 			text_11_displayed = true
 			$GUI/HUD/PlayerScore.show()
 			$GUI/HUD/PlayerSkrilla.show()
-			playPlayerMessage("quick here comes a RES REQ now")
+			$MessageBox.playPlayerMessage("quick here comes a RES REQ now")
 			waiting_for_action = true
 		else:
 			if !request_spawned:
@@ -219,17 +194,17 @@ func progressTutorial() -> void:
 				if(!get_tree().has_group("requests")):
 					killing_tutorial_complete = true
 					waiting_for_action = false
-					playPlayerMessage("nice work and note that the requests will come in waves")
+					$MessageBox.playPlayerMessage("nice work and note that the requests will come in waves")
 	elif !health_tutorial_complete:
 		if !text_12_displayed:
 			text_12_displayed = true
-			playPlayerMessage("if a request gets to ars it will take damage and if a request touches you then you will take damage")
+			$MessageBox.playPlayerMessage("if a request gets to ars it will take damage and if a request touches you then you will take damage")
 		elif !text_13_displayed:
 			text_13_displayed = true
-			playPlayerMessage("if you fall off the screen then you will also take some damage but for now you are safe")
+			$MessageBox.playPlayerMessage("if you fall off the screen then you will also take some damage but for now you are safe")
 		elif !text_14_displayed:
 			text_14_displayed = true
-			playPlayerMessage("if you or ars takes too much damage then ars will get overwhelmed with requests and you will fail your mission")
+			$MessageBox.playPlayerMessage("if you or ars takes too much damage then ars will get overwhelmed with requests and you will fail your mission")
 			$GUI/HUD/PlayerHealth.show()
 			waiting_for_action = true
 		else:
@@ -243,26 +218,26 @@ func progressTutorial() -> void:
 					gameState.wave_in_progress = false
 					health_tutorial_complete = true
 					waiting_for_action = false
-					playPlayerMessage("after analyzing results from that surprise test it appears you have suboptimal reflexes")	
+					$MessageBox.playPlayerMessage("after analyzing results from that surprise test it appears you have suboptimal reflexes")	
 	# buying tutorial
 	elif !buying_tutorial_complete:
 		if !text_15_displayed:
 			text_15_displayed = true
-			playPlayerMessage("remember you can give up at any time but otherwise I will heal you now so we can continue")
+			$MessageBox.playPlayerMessage("remember you can give up at any time but otherwise I will heal you now so we can continue")
 		elif !text_16_displayed:
 			gameState.reset_stats()
 			text_16_displayed = true
-			playPlayerMessage("as you can see in the top right corner you have earned some skrilla for destroying the first request")
+			$MessageBox.playPlayerMessage("as you can see in the top right corner you have earned some skrilla for destroying the first request")
 		elif !text_17_displayed:
 			text_17_displayed = true
-			playPlayerMessage("you will only earn it when you destroy a request but I will generously give you some extra skrilla now")
+			$MessageBox.playPlayerMessage("you will only earn it when you destroy a request but I will generously give you some extra skrilla now")
 		elif !text_18_displayed:
 			text_18_displayed = true
 			gameState.updatePlayerSkrilla(700)
-			playPlayerMessage("you can use skrilla to buy upgrades for your abilities in the shop but only in between waves of requests")
+			$MessageBox.playPlayerMessage("you can use skrilla to buy upgrades for your abilities in the shop but only in between waves of requests")
 		elif !text_19_displayed:
 			text_19_displayed = true
-			playPlayerMessage("try it now by buying 2 shooting upgrades you can press the b key to open and close the shop and then left click on the upgrade buttons")
+			$MessageBox.playPlayerMessage("try it now by buying 2 shooting upgrades you can press the b key to open and close the shop and then left click on the upgrade buttons")
 			$GUI/Shop.addShopItem("Shooting")
 			waiting_for_action = true
 		else:
@@ -274,16 +249,16 @@ func progressTutorial() -> void:
 				buying_tutorial_complete = true
 				if shop_open:
 					toggleShop()
-				playPlayerMessage("as you already know you can try to compensate for your shortcomings by buying more things")
+				$MessageBox.playPlayerMessage("as you already know you can try to compensate for your shortcomings by buying more things")
 	# power of x tutorial
 	elif !power_of_x_tutorial_complete:
 		if !text_20_displayed:
 			text_20_displayed = true
-			playPlayerMessage("the last thing you need to know is how to use the power of x")
+			$MessageBox.playPlayerMessage("the last thing you need to know is how to use the power of x")
 		elif !text_21_displayed:
 			text_21_displayed = true
 			gameState.updatePlayerSkrilla(200)
-			playPlayerMessage("using the skrilla I have just given you use the shop to buy the power of x")
+			$MessageBox.playPlayerMessage("using the skrilla I have just given you use the shop to buy the power of x")
 			$GUI/Shop.addShopItem("Power of X")
 			waiting_for_action = true
 		elif !bought_power_of_x:
@@ -295,13 +270,13 @@ func progressTutorial() -> void:
 				waiting_for_action = false
 				if shop_open:
 					toggleShop()
-				playPlayerMessage("you can use the power of x during a wave to destroy all requests on the screen by pressing the x key")
+				$MessageBox.playPlayerMessage("you can use the power of x during a wave to destroy all requests on the screen by pressing the x key")
 		elif !text_22_displayed:
 			text_22_displayed = true
-			playPlayerMessage("the more upgrades you buy for it the more times you can use it during a wave")
+			$MessageBox.playPlayerMessage("the more upgrades you buy for it the more times you can use it during a wave")
 		elif !text_23_displayed:
 			text_23_displayed = true
-			playPlayerMessage("more requests are inbound press the x key to unleash the power of x on them")
+			$MessageBox.playPlayerMessage("more requests are inbound press the x key to unleash the power of x on them")
 			waiting_for_action = true
 		elif !power_of_x_used:
 			if !more_requests_spawned:
@@ -318,18 +293,18 @@ func progressTutorial() -> void:
 					waiting_for_action = false
 					power_of_x_used = true
 					power_of_x_tutorial_complete = true
-					playPlayerMessage("nice job but be warned that sometimes the power of x can backfire on you")
+					$MessageBox.playPlayerMessage("nice job but be warned that sometimes the power of x can backfire on you")
 					all_tutorials_complete = true	
 	elif all_tutorials_complete and !ready_to_quit:
 		if !complete_text1_displayed:
 			complete_text1_displayed = true
-			playPlayerMessage("that is it")
+			$MessageBox.playPlayerMessage("that is it")
 		elif !complete_text2_displayed:
 			complete_text2_displayed = true
-			playPlayerMessage("now you are ready to take ars into production")
+			$MessageBox.playPlayerMessage("now you are ready to take ars into production")
 		elif !complete_text3_displayed:
 			complete_text3_displayed = true
-			playPlayerMessage("hopefully you will remember something from this tutorial")
+			$MessageBox.playPlayerMessage("hopefully you will remember something from this tutorial")
 			ready_to_quit = true
 	elif ready_to_quit:
 		sceneManager.goto_scene("res://Main.tscn")
@@ -347,7 +322,7 @@ func _process(delta):
 	if Input.is_action_just_pressed("open_shop") and shop_enabled:
 		toggleShop()
 		
-	if waiting_for_input and (Input.is_action_just_pressed("ui_accept") or waiting_for_action):
+	if $MessageBox.waiting_for_input and (Input.is_action_just_pressed("ui_accept") or waiting_for_action):
 		progressTutorial()
 		
 	

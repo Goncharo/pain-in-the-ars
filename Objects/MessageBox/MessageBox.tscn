@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Fonts/ARCADECLASSIC.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Objects/MessageBox/MessageBox.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Sounds/text_sound.wav" type="AudioStream" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 40.0
@@ -38,4 +40,9 @@ text = "MESSAGE BOX "
 readonly = true
 wrap_enabled = true
 caret_moving_by_right_click = false
+script = ExtResource( 2 )
+
+[node name="TextSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -2.0
 
