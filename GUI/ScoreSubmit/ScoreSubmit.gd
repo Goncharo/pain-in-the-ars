@@ -3,7 +3,7 @@ extends Control
 var gameState : GameState
 var sceneManager : SceneManager
 
-var apiURL: String = "http://localhost:8666/highscore/"
+var apiURL: String = "https://www.goncharov.ca/api/pain-in-the-ars/highscore/"
 var waiting = false
 
 # Called when the node enters the scene tree for the first time.

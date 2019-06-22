@@ -1,8 +1,15 @@
 var express     = require("express"),
-    mongoose    = require("mongoose");
+    mongoose    = require("mongoose"),
+    cors        = require("cors");
 
 // configure express application
 var app = express()
+
+var corsOptions = {
+    origin: 'https://goncharov.ca',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  };
+app.use(cors(corsOptions));
 
 // connect to mongo database
 var databaseURL = "mongodb://localhost/pain-in-the-ars-db"

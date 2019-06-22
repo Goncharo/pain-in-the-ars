@@ -5,7 +5,7 @@ export var num_to_query = 10
 
 var sceneManager : SceneManager
 
-var apiURL: String = "http://localhost:8666/highscore?num=" + str(num_to_query)
+var apiURL: String = "https://www.goncharov.ca/api/pain-in-the-ars/highscore?num=" + str(num_to_query)
 
 var waiting = true
 
