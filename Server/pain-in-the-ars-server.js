@@ -10,7 +10,7 @@ mongoose.connect(databaseURL, {useNewUrlParser: true});
 
 // configure highscores routes
 var highscoresRoute = require("./routes/highscores");
-app.use(highscoresRoute);
+app.use('/api/pain-in-the-ars', highscoresRoute);
 
 // start server on port 8666
 var port = 8666
