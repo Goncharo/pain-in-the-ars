@@ -6,7 +6,7 @@ var gameState: GameState
 var sceneManager: SceneManager
 
 export var initial_spawn_speed: float = 1.5
-export var min_spawn_speed: float = 0.2
+export var min_spawn_speed: float = 0.4
 export var additional_speed: float = -0.1
 
 export var initial_request_speed_mult: float = 1.0

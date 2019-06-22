@@ -9,17 +9,17 @@ enum request_types {TLE, GET_PASSES, RES_REQ}
 export var TLE_SPEED = 50
 export var TLE_HEALTH = 20
 export var TLE_DAMAGE = 20
-export var TLE_REWARD = 7
+export var TLE_REWARD = 10
 
 export var GET_PASSES_SPEED = 75
 export var GET_PASSES_HEALTH = 10
 export var GET_PASSES_DAMAGE = 10
-export var GET_PASSES_REWARD = 2
+export var GET_PASSES_REWARD = 5
 
 export var RES_REQ_SPEED = 25
 export var RES_REQ_HEALTH = 50
 export var RES_REQ_DAMAGE = 60
-export var RES_REQ_REWARD = 15
+export var RES_REQ_REWARD = 20
 
 var speed = 0
 var health = 0
