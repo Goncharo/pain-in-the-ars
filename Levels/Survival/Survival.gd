@@ -155,8 +155,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("open_shop") and shop_enabled:
 		toggleShop()
 	if Input.is_action_just_pressed("debug_mode"):
-		$WaveTimer.stop()
-		$SecondTimer.stop()
-		shop_enabled = true
-		gameState.updatePlayerSkrilla(100000)
-		gameState.updatePlayerMessage("")
+		pass
+		#$WaveTimer.stop()
+		#$SecondTimer.stop()
+		#shop_enabled = true
+		#gameState.updatePlayerSkrilla(100000)
+		#gameState.updatePlayerMessage("")
