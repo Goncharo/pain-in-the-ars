@@ -116,6 +116,8 @@ func nextWave() -> void:
 	# disable buy menu access & hide shop GUI
 	shop_enabled = false
 	gameState.wave_in_progress = true
+	shop_open = false
+	gameState.shop_open = shop_open
 	$GUI/Shop.hide()
 	$GUI/HUD.show()
 	$BackgroundMusic.bus = "Master"
